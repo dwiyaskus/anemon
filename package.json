@@ -9,11 +9,9 @@
     "test": "ng test",
     "build-library": "npm version patch & ng build anemon",
     "pack-lib": "cd dist/anemon && npm pack",
-    "sb": "ng run anemon:storybook",
-    "build-sb": "ng run anemon:build-storybook",
-    "storybook-vercel": "start-storybook -p 6006 -s public",
-    "build-storybook-vercel": "build-storybook -s public",
-    "serve-storybook-vercel": "serve storybook-static"
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public",
+    "serve-storybook": "serve storybook-static"
   },
   "private": false,
   "dependencies": {
