@@ -1,0 +1,16 @@
+<div class="flex">
+  <input
+    class="mr-2 p-2"
+    type="checkbox"
+    (click)="click.emit($event)"
+    (change)="change.emit($event)"
+    (focus)="focus.emit($event)"
+    (blur)="blur.emit($event)"
+    [id]="id"
+    [name]="name"
+    [ngClass]="classname"
+  />
+  <span class="text-sm">
+    {{ title }}
+  </span>
+</div>

@@ -1,0 +1,11 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/anemon",
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "styleIncludePaths": ["src/assets/css/anemon.styles.css"]
+  },
+  "assets": [
+    "src/assets/css/anemon.styles.css"
+  ]
+}

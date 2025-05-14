@@ -1,0 +1,226 @@
+.chart-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+  padding: 2% 0;
+}
+
+.y-axis {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.bar-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 100%;
+  border-left: 1px solid #333;
+  border-bottom: 1px solid #333;
+  width: 100%;
+  position: relative;
+}
+
+.bar-group.full:hover {
+  opacity: 0.8; /* Adjust opacity to your preference */
+}
+
+.bar-group {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.bar {
+  /* width: 80px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: opacity 0.3s ease; /* Smooth transition for opacity change */
+}
+.bar.single:hover {
+  opacity: 0.8; /* Adjust opacity to your preference */
+}
+
+.bar .value {
+  position: absolute;
+}
+
+.bar .axis {
+  position: absolute;
+  bottom: -20px;
+}
+
+.axis {
+  position: absolute;
+  bottom: -20px;
+}
+.x-axis {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.chart-area {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Dotted Grid Lines */
+.grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px dotted #000;
+  z-index: -1;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0 10px;
+  height: 100%;
+}
+
+.group.full:hover {
+  opacity: 0.8; /* Adjust opacity to your preference */
+}
+
+.legend-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.legend-container.left,
+.legend-container.right {
+  flex-direction: column;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
+
+.legend-color {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border: 1px solid #ddd;
+}
+
+.chart-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin: auto;
+}
+
+.chart-container.top {
+  flex-flow: column;
+}
+
+.chart-container.bottom {
+  flex-flow: column-reverse;
+}
+
+.chart-container.right {
+  flex-flow: row;
+}
+
+.chart-container.left {
+  flex-flow: row-reverse;
+}
+
+/* Horizontal */
+.chart {
+  width: 100%;
+}
+
+.chart-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.label {
+  width: 100px;
+}
+
+.bar-container-horizontal {
+  flex: 1;
+  display: grid;
+  align-items: center;
+}
+.bar-container-horizontal.full:hover {
+  opacity: 0.8; /* Adjust opacity to your preference */
+}
+
+.chart-area {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.bar-container-horizontal.stacked {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.bar-horizontal {
+  height: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease; /* Smooth transition for opacity change */
+}
+
+.bar-horizontal.single:hover {
+  opacity: 0.8; /* Adjust opacity to your preference */
+}
+
+/* Horizontal */
+.page-btn {
+  cursor: pointer;
+  border: 1px solid #333;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+}
+
+.page-btn:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+  margin: 0 5px;
+}
+
+.tooltip {
+  position: fixed;
+  color: rgba(0, 0, 0, 0.75);
+  background-color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 99;
+}
+.tooltip.full {
+  text-align: left;
+}

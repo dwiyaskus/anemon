@@ -1,0 +1,88 @@
+.chart-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: fit-content;
+  margin: auto;
+}
+
+.chart-container.top {
+  flex-direction: column;
+}
+
+.chart-container.bottom {
+  flex-direction: column-reverse;
+}
+
+.chart-container.right {
+  flex-direction: row;
+}
+
+.chart-container.left {
+  flex-direction: row-reverse;
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  cursor: pointer;
+}
+
+canvas {
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+}
+
+.chart-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  pointer-events: none;
+}
+
+.legend-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.legend-container.left,
+.legend-container.right {
+  flex-direction: column;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  font-size: 14px;
+}
+
+.legend-color {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border: 1px solid #ddd;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 5px;
+  display: none;
+}
+
+.chart-container:hover .tooltip {
+  display: block;
+}

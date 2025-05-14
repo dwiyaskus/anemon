@@ -1,0 +1,600 @@
+<div
+  class="chart-container"
+  [class]="legendPosition"
+  [style.font-size.px]="fontSize"
+  [style.font-family]="fontFamilly"
+>
+  <div
+    style="display: flex; align-items: center"
+    *ngIf="legendPosition === 'top' || legendPosition === 'bottom'"
+  >
+    <div
+      class="legend-container"
+      style="width: '100%'; overflow: hidden; display: flex"
+      [style.max-width.px]="legend_width"
+      #legendContainer
+    >
+      <div class="legend-item">
+        <div *ngFor="let legend of legend; let i = index" class="legend-item">
+          <span
+            class="legend-color"
+            [style.background-color]="legend.color"
+          ></span>
+          {{ legend.label }}
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; min-width: fit-content">
+      <img src="https://www.flaticon.com/free-icons/arrowhead" alt="" />
+      <button
+        (click)="previousScroll()"
+        [disabled]="curP === 1"
+        class="page-btn"
+      >
+        <
+      </button>
+      <span class="page-info">{{ curP }} / {{ totP }}</span>
+      <button
+        (click)="nextScroll()"
+        [disabled]="curP === totP"
+        class="page-btn"
+      >
+        >
+      </button>
+    </div>
+  </div>
+
+  <!-- Dist Bar -->
+  <div class="chart-wrapper" *ngIf="direction === 'vertical'">
+    <div class="chart-area">
+      <div class="y-axis">
+        <span *ngFor="let tick of yAxisTicks">{{ tick }}</span>
+      </div>
+
+      <!-- STANDARD CHART -->
+      <div
+        class="bar-container"
+        [style.border-right]="rightAxis ? '1px solid #333' : ''"
+        *ngIf="type === 'standard'"
+      >
+        <div
+          *ngFor="let item of data"
+          class="bar-group"
+          [class]="styleTooltip"
+          #bar
+          (mouseenter)="onGroupHover(item.label, $event)"
+          (mousemove)="onMouseMove($event)"
+          (mouseleave)="onGroupLeave()"
+        >
+          <div
+            class="bar"
+            [class]="styleTooltip"
+            *ngFor="let day of item.values; let i = index"
+            [style.height]="day + 'px'"
+            [style.background-color]="color[i]"
+            [style.width.px]="(width / data.length) * 0.4"
+            [style.margin-top.px]="getMaxHeight(item.values, day)"
+            (mouseenter)="onBarHover(day, item.label, $event)"
+            (mousemove)="onMouseMove($event)"
+            (mouseleave)="onBarLeave()"
+          >
+            <span
+              class="value"
+              [style.top.px]="valueLabelPosition === 'outside' ? -20 : ''"
+              [style.position-area]="
+                valueLabelPosition === 'inside' ? 'center' : ''
+              "
+            >
+              {{ day }}
+            </span>
+
+            <!-- Single Tooltip -->
+            <div
+              class="tooltip"
+              *ngIf="
+                styleTooltip === 'single' &&
+                hoveredBar === day &&
+                hoveredGroup === item.label
+              "
+              [style.left.px]="tooltipX + 10"
+              [style.top.px]="tooltipY - 40"
+            >
+              {{ day }}
+            </div>
+          </div>
+
+          <!-- Full Tooltip -->
+          <div
+            class="tooltip full"
+            *ngIf="styleTooltip === 'full' && hoveredGroup === item.label"
+            [style.left.px]="tooltipX + 10"
+            [style.top.px]="tooltipY - 40"
+          >
+            <div>{{ item.label }}</div>
+            <div *ngFor="let val of item.values">{{ val }}</div>
+          </div>
+
+          <span
+            class="axis"
+            [style.transform]="
+              rotateXAxis ? 'rotate(' + rotateXAxis + 'deg)' : ''
+            "
+          >
+            {{ item.label }}
+          </span>
+        </div>
+      </div>
+
+      <!-- STACKED CHART -->
+      <div class="bar-container" *ngIf="type === 'stacked'">
+        <div
+          class="group"
+          *ngFor="let group of data"
+          [class]="styleTooltip"
+          (mouseenter)="onGroupHover(group.label, $event)"
+          (mousemove)="onMouseMove($event)"
+          (mouseleave)="onGroupLeave()"
+        >
+          <div
+            class="bar"
+            *ngFor="let bar of group.values; let i = index"
+            [style.height]="bar + 'px'"
+            [style.background-color]="color[i]"
+            [style.width.px]="(width / group.values.length) * 0.5"
+            [class]="styleTooltip"
+            (mouseenter)="onBarHover(bar, group.label, $event)"
+            (mousemove)="onMouseMove($event)"
+            (mouseleave)="onBarLeave()"
+          >
+            <span
+              class="value"
+              [style.top.px]="-20"
+              *ngIf="valueLabelPosition === 'outside' && i === 0"
+            >
+              {{ getTotalStacked(group.values) }}
+            </span>
+
+            <span
+              class="value"
+              *ngIf="valueLabelPosition === 'inside'"
+              [style.position-area]="'center'"
+            >
+              {{ bar }}
+            </span>
+
+            <!-- Single Tooltip -->
+            <div
+              class="tooltip"
+              *ngIf="
+                styleTooltip === 'single' &&
+                hoveredBar === bar &&
+                hoveredGroup === group.label
+              "
+              [style.left.px]="tooltipX + 10"
+              [style.top.px]="tooltipY - 40"
+            >
+              <div>{{ group.label }}</div>
+              <div class="flex justify-between gap-3">
+                <div class="flex items-center gap-1">
+                  <div
+                    [style.background-color]="color[i]"
+                    class="w-2 h-2 rounded"
+                  ></div>
+                  <div>{{ legend[i].label }}</div>
+                </div>
+                <div class="font-bold">{{ bar }}</div>
+              </div>
+            </div>
+
+            <span
+              class="axis"
+              [style.transform]="
+                rotateXAxis ? 'rotate(' + rotateXAxis + 'deg)' : ''
+              "
+              *ngIf="i === group.values.length - 1"
+            >
+              {{ group.label }}
+            </span>
+          </div>
+
+          <!-- Full Tooltip -->
+          <div
+            class="tooltip full"
+            *ngIf="styleTooltip === 'full' && hoveredGroup === group.label"
+            [style.left.px]="tooltipX + 10"
+            [style.top.px]="tooltipY - 40"
+          >
+            <div>{{ group.label }}</div>
+            <div
+              *ngFor="let val of group.values; let i = index"
+              class="flex justify-between"
+            >
+              <div class="flex items-center gap-1">
+                <div
+                  [style.background-color]="color[i]"
+                  class="w-2 h-2 rounded"
+                ></div>
+                <div>{{ legend[i].label }}</div>
+              </div>
+
+              <div class="font-bold">{{ val }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="y-axis" *ngIf="rightAxis">
+        <span *ngFor="let tick of yAxisTicks">{{ tick }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="chart-wrapper" *ngIf="direction === 'vertical'">
+    <div class="chart-area">
+      <div class="y-axis">
+        <span *ngFor="let tick of yAxisTicks">{{ tick }}</span>
+      </div>
+
+      <div
+        class="bar-container"
+        [style.border-right]="rightAxis ? '1px solid #333' : ''"
+        *ngIf="type === 'standard'"
+      >
+        <div
+          *ngFor="let item of data"
+          class="bar-group"
+          [class]="styleTooltip"
+          #bar
+        >
+          <div
+            class="bar"
+            [class]="styleTooltip"
+            *ngFor="let day of item.values; let i = index"
+            [style.height]="day + 'px'"
+            [style.background-color]="color[i]"
+            [style.width.px]="(width / data.length) * 0.4"
+            [style.margin-top.px]="getMaxHeight(item.values, day)"
+          >
+            <span
+              class="value"
+              [style.top.px]="
+                valueLabelPosition === 'outside' ? -20 : ''
+              "
+              [style.position-area]="
+                valueLabelPosition === 'inside' ? 'center' : ''
+              "
+              >{{ day }}</span
+            >
+          </div>
+          <span
+            class="axis"
+            [style.transform]="
+              rotateXAxis ? 'rotate(' + rotateXAxis + 'deg)' : ''
+            "
+            >{{ item.label }}</span
+          >
+        </div>
+      </div>
+
+      <div class="bar-container" *ngIf="type === 'stacked'">
+        <div
+          class="group"
+          *ngFor="let group of data"
+          [class]="styleTooltip"
+        >
+          <div
+            class="bar"
+            *ngFor="let bar of group.values; let i = index"
+            [style.height]="bar + 'px'"
+            [style.background-color]="color[i]"
+            [style.width.px]="(width / group.values.length) * 0.5"
+            [class]="styleTooltip"
+          >
+            <span
+              class="value"
+              [style.top.px]="-20"
+              *ngIf="valueLabelPosition === 'outside' && i === 0"
+              >{{ getTotalStacked(group.values) }}</span
+            >
+
+            <span
+              class="value"
+              *ngIf="valueLabelPosition === 'inside'"
+              [style.position-area]="'center'"
+              >{{ bar }}</span
+            >
+            <span
+              class="axis"
+              [style.transform]="
+                rotateXAxis
+                  ? 'rotate(' + rotateXAxis + 'deg)'
+                  : ''
+              "
+              *ngIf="i === group.values.length - 1"
+              >{{ group.label }}</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="y-axis" *ngIf="rightAxis">
+        <span *ngFor="let tick of yAxisTicks">{{ tick }}</span>
+      </div>
+    </div>
+  </div> -->
+  <!-- Dist Bar -->
+  <!-- Horizontal Bar -->
+  <div class="chart" *ngIf="direction === 'horizontal'">
+    <div *ngFor="let item of data" class="chart-row">
+      <div class="label">{{ item.label }}</div>
+
+      <div
+        class="bar-container-horizontal"
+        [class]="styleTooltip"
+        [style]="{
+          display: type === 'stacked' ? 'flex' : '',
+          gap: type === 'stacked' ? '0px' : '5px'
+        }"
+        (mouseenter)="onGroupHover(item.label, $event)"
+        (mousemove)="onMouseMove($event)"
+        (mouseleave)="onGroupLeave()"
+      >
+        <!-- Standard Horizontal Bars -->
+        <div *ngIf="type !== 'stacked'">
+          <div
+            *ngFor="let bar of item.values; let i = index"
+            style="display: flex"
+          >
+            <div
+              class="bar-horizontal"
+              [style.width]="getBarWidth(bar)"
+              [style.background-color]="color[i]"
+              [attr.data-value]="bar"
+              [class]="styleTooltip"
+              (mouseenter)="onBarHover(bar, item.label, $event)"
+              (mousemove)="onMouseMove($event)"
+              (mouseleave)="onBarLeave()"
+            >
+              <span
+                class="value"
+                *ngIf="valueLabelPosition === 'inside'"
+                [style.position-area]="'center'"
+              >
+                {{ bar }}
+              </span>
+
+              <!-- Tooltip: Single -->
+              <div
+                class="tooltip"
+                *ngIf="
+                  styleTooltip === 'single' &&
+                  hoveredBar === bar &&
+                  hoveredGroup === item.label
+                "
+                [style.left.px]="tooltipX + 10"
+                [style.top.px]="tooltipY - 40"
+              >
+                {{ bar }}
+              </div>
+            </div>
+
+            <span
+              class="value"
+              *ngIf="valueLabelPosition === 'outside'"
+              [style.position-area]="'center'"
+            >
+              {{ bar }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Stacked Horizontal Bars -->
+        <div *ngIf="type === 'stacked'" style="width: 100%; display: flex">
+          <div
+            *ngFor="let bar of item.values; let i = index"
+            class="bar-horizontal"
+            [style.width]="getBarWidth(bar)"
+            [style.background-color]="color[i]"
+            [attr.data-value]="bar"
+            [class]="styleTooltip"
+            (mouseenter)="onBarHover(bar, item.label, $event)"
+            (mousemove)="onMouseMove($event)"
+            (mouseleave)="onBarLeave()"
+          >
+            <span
+              class="value"
+              *ngIf="valueLabelPosition === 'inside'"
+              [style.position-area]="'center'"
+            >
+              {{ bar }}
+            </span>
+
+            <!-- Tooltip: Single -->
+            <div
+              class="tooltip"
+              *ngIf="
+                styleTooltip === 'single' &&
+                hoveredBar === bar &&
+                hoveredGroup === item.label
+              "
+              [style.left.px]="tooltipX + 10"
+              [style.top.px]="tooltipY - 40"
+            >
+              {{ bar }}
+            </div>
+          </div>
+
+          <span
+            class="value"
+            [style.top.px]="-20"
+            *ngIf="valueLabelPosition === 'outside'"
+          >
+            {{ getTotalStacked(item.values) }}
+          </span>
+        </div>
+
+        <!-- Tooltip: Full Group -->
+        <div
+          class="tooltip full"
+          *ngIf="styleTooltip === 'full' && hoveredGroup === item.label"
+          [style.left.px]="tooltipX + 10"
+          [style.top.px]="tooltipY - 40"
+        >
+          <div *ngFor="let val of item.values">{{ val }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      style="
+        border-top: 1px solid #000;
+        display: flex;
+        justify-content: space-between;
+        margin-left: 100px;
+      "
+    >
+      <div *ngFor="let tick of xAxisTicks">{{ tick }}</div>
+    </div>
+  </div>
+
+  <!-- <div class="chart" *ngIf="direction === 'horizontal'">
+    <div *ngFor="let item of data" class="chart-row">
+      <div class="label">{{ item.label }}</div>
+      <div
+        class="bar-container-horizontal"
+        [class]="styleTooltip"
+        [style]="{ display: type === 'stacked' ? 'flex' : '', gap:type === 'stacked' ? '0px' : '5px', }"
+      >
+        <div *ngIf="type !== 'stacked'">
+          <div
+            *ngFor="let bar of item.values; let i = index"
+            style="display: flex"
+          >
+            <div
+              class="bar-horizontal"
+              [style.width]="getBarWidth(bar)"
+              [style.background-color]="color[i]"
+              [attr.data-value]="bar"
+              [class]="styleTooltip"
+            >
+              <span
+                class="value"
+                *ngIf="valueLabelPosition === 'inside'"
+                [style.position-area]="'center'"
+                >{{ bar }}</span
+              >
+            </div>
+            <span
+              class="value"
+              *ngIf="valueLabelPosition === 'outside'"
+              [style.position-area]="'center'"
+              >{{ bar }}</span
+            >
+          </div>
+        </div>
+        <div
+          *ngIf="type === 'stacked'"
+          style="width: 100%; display: flex"
+        >
+          <div
+            *ngFor="let bar of item.values; let i = index"
+            class="bar-horizontal"
+            [style.width]="getBarWidth(bar)"
+            [style.background-color]="color[i]"
+            [attr.data-value]="bar"
+            [class]="styleTooltip"
+          >
+            <span
+              class="value"
+              *ngIf="valueLabelPosition === 'inside'"
+              [style.position-area]="'center'"
+              >{{ bar }}</span
+            >
+          </div>
+          <span
+            class="value"
+            [style.top.px]="-20"
+            *ngIf="valueLabelPosition === 'outside'"
+            >{{ getTotalStacked(item.values) }}</span
+          >
+        </div>
+      </div>
+    </div>
+    <div
+      style="
+        border-top: 1px solid #000;
+        display: flex;
+        justify-content: space-between;
+        margin-left: 100px;
+      "
+    >
+      <div *ngFor="let tick of xAxisTicks">{{ tick }}</div>
+    </div>
+  </div> -->
+
+  <!-- Horizontal Bar -->
+  <!-- <div style="display: flex; align-items: center">
+    <div
+    *ngIf="legendPosition === 'left' || legendPosition === 'right'"
+      class="legend-container"
+      style="width: '100%'; overflow: hidden; display: flex"
+      [style.max-width.px]="legend_width"
+      #legendContainer
+    >
+      <div class="legend-item">
+        <div
+          *ngFor="let legend of testLegend; let i = index"
+          class="legend-item"
+        >
+          <span
+            class="legend-color"
+            [style.background-color]="legend.color"
+          ></span>
+          {{ legend.label }}
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; min-width: fit-content">
+      <img src="https://www.flaticon.com/free-icons/arrowhead" alt="" />
+      <button
+        (click)="previousScroll()"
+        [disabled]="curP === 1"
+        class="page-btn"
+      >
+        <
+      </button>
+      <span class="page-info">{{ curP }} / {{ totP }}</span>
+      <button
+        (click)="nextScroll()"
+        [disabled]="curP === totP"
+        class="page-btn"
+      >
+        >
+      </button>
+    </div>
+  </div> -->
+  <div
+    *ngIf="legendPosition === 'left' || legendPosition === 'right'"
+    class="legend-container"
+    [style.max-height.px]="height"
+    style="height: '100%'; overflow: hidden"
+  >
+    <div>
+      <div *ngFor="let legend of legend; let i = index">
+        <span
+          class="legend-color"
+          [style.background-color]="legend.color"
+        ></span>
+        {{ legend.label }}
+      </div>
+    </div>
+    <!-- <div *ngIf="['stacked'].includes(type)" class="legend-item">
+      <div class="legend-item" *ngFor="let legend of legend; let i = index">
+        <div class="legend-item">
+          <div class="legend-color" [style.background-color]="color[i]"></div>
+          <span>{{ legend }}</span>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

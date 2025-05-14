@@ -1,0 +1,72 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "anemon": {
+      "projectType": "library",
+      "root": "projects/anemon",
+      "sourceRoot": "projects/anemon/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/anemon/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/anemon/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/anemon/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/anemon/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/anemon/.storybook",
+            "browserTarget": "anemon:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/anemon"
+            ],
+            "port": 6006,
+            "styles": ["./projects/anemon/src/assets/css/anemon.styles.css"]
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/anemon/.storybook",
+            "browserTarget": "anemon:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/anemon"
+            ],
+            "outputDir": "storybook-static",
+            "styles": ["./projects/anemon/src/assets/css/anemon.styles.css"]
+          }
+        }
+      }
+    }
+  }
+}
