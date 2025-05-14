@@ -1,0 +1,24 @@
+<div class="chart-container" [class]="legendPosition">
+  <div
+    *ngIf="legendPosition === 'top' || legendPosition === 'bottom'"
+    class="legend-container"
+  >
+    <div *ngFor="let label of labels; let i = index" class="legend-item">
+      <span class="legend-color" [style.background-color]="colors[i]"></span>
+      {{ label }}
+    </div>
+  </div>
+  <div class="chart-wrapper">
+    <canvas #canvas width="400" height="400"></canvas>
+    <div class="chart-label" *ngIf="type === 'donut'">{{ label }}</div>
+  </div>
+  <div
+    *ngIf="legendPosition === 'left' || legendPosition === 'right'"
+    class="legend-container"
+  >
+    <div *ngFor="let label of labels; let i = index" class="legend-item">
+      <span class="legend-color" [style.background-color]="colors[i]"></span>
+      {{ label }}
+    </div>
+  </div>
+</div>

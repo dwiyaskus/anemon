@@ -1,0 +1,22 @@
+<div
+  [style.display]="['top', 'bottom'].includes(position) ? 'column' : 'flex'"
+  [style.place-items]="'center'"
+  [style.width]="'100%'"
+  [style.place-content]="'space-around'"
+>
+  <div *ngIf="['top', 'left'].includes(position)">
+    <span [style.font-size.rem]="size_label" [style.color]="label_color">{{
+      label
+    }}</span>
+  </div>
+  <div>
+    <span [style.font-size.rem]="size_number" [style.color]="number_color">{{
+      number
+    }}</span>
+  </div>
+  <div *ngIf="['bottom', 'right'].includes(position)">
+    <span [style.font-size.rem]="size_label" [style.color]="label_color">{{
+      label
+    }}</span>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<button
+  [disabled]="disabled"
+  (click)="handleClick($event)"
+  (dblclick)="dblclick.emit($event)"
+  (focus)="focus.emit($event)"
+  (blur)="blur.emit($event)"
+  (mouseover)="mouseover.emit($event)"
+  (mouseout)="mouseout.emit($event)"
+  (keydown)="keydown.emit($event)"
+  (keyup)="keyup.emit($event)"
+  [ngClass]="classname"
+  class="p-2"
+>
+  {{ label }}
+  <ng-content></ng-content>
+</button>
