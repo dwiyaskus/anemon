@@ -34,6 +34,26 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/anemon/src/lib/chart/gauge/gauge.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    value: 85,\r\n    max: 150,\r\n    label: 'Engine RPM',\r\n    colorLevels: [\r\n      { threshold: 60, color: '#4caf50' },\r\n      { threshold: 100, color: '#ffeb3b' },\r\n      { threshold: 150, color: '#f44336' },\r\n    ],\r\n  },\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/anemon/src/lib/chart/line/line.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    data: [\r\n      {\r\n        name: 'Series A',\r\n        points: [\r\n          { x: 0, y: 1 },\r\n          { x: 1, y: 3 },\r\n          { x: 2, y: 4 },\r\n          { x: 3, y: 1 },\r\n          { x: 4, y: 6 },\r\n          { x: 5, y: 5 },\r\n          { x: 6, y: 2 },\r\n          { x: 7, y: 1 },\r\n          { x: 8, y: 7 },\r\n          { x: 9, y: 9 },\r\n          { x: 10, y: 13 },\r\n          { x: 11, y: 3 },\r\n          { x: 12, y: 1 },\r\n          { x: 13, y: 4 },\r\n          { x: 14, y: 0 },\r\n          { x: 15, y: 3 },\r\n          { x: 16, y: 9 },\r\n        ],\r\n        color: '#007bff',\r\n      },\r\n      {\r\n        name: 'Series B',\r\n        points: [\r\n          { x: 0, y: 2 },\r\n          { x: 1, y: 4 },\r\n          { x: 2, y: 7 },\r\n          { x: null, y: null },\r\n          { x: 4, y: 7 },\r\n          { x: 5, y: 4 },\r\n          { x: 6, y: 2 },\r\n          { x: 7, y: 8 },\r\n          { x: 8, y: 10 },\r\n          { x: 9, y: 11 },\r\n          { x: 10, y: 1 },\r\n          { x: 11, y: 6 },\r\n          { x: 12, y: 5 },\r\n          { x: 13, y: 2 },\r\n          { x: 14, y: 1 },\r\n          { x: 15, y: 7 },\r\n          { x: 16, y: 5 },\r\n        ],\r\n        color: '#28a745',\r\n      },\r\n      {\r\n        name: 'Series C',\r\n        points: [\r\n          { x: 0, y: 3 },\r\n          { x: 1, y: 5 },\r\n          { x: 2, y: 3 },\r\n          { x: 3, y: 6 },\r\n          { x: 4, y: 8 },\r\n          { x: 5, y: 3 },\r\n          { x: 6, y: 1 },\r\n          { x: 7, y: 4 },\r\n          { x: 8, y: 0 },\r\n          { x: 9, y: 3 },\r\n          { x: 10, y: 9 },\r\n          { x: 11, y: 2 },\r\n          { x: 12, y: 8 },\r\n          { x: 13, y: 10 },\r\n          { x: 14, y: 11 },\r\n          { x: 15, y: 1 },\r\n          { x: 16, y: 10 },\r\n        ],\r\n        color: '#dc3545',\r\n      },\r\n    ],\r\n  },\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/anemon/src/lib/chart/pie-donut/pie-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -121,86 +141,6 @@
                 "defaultValue": "{\r\n  name: 'Horizontal Stack',\r\n  args: {\r\n    data: [\r\n      {\r\n        label: 'Matcha Latte',\r\n        values: [40, 80, 90],\r\n      },\r\n      {\r\n        label: 'Milk Tea',\r\n        values: [60, 70, 100],\r\n      },\r\n      {\r\n        label: 'Cheese Cocoa',\r\n        values: [80, 60, 90],\r\n      },\r\n      {\r\n        label: 'Walnut Brownie',\r\n        values: [90, 50, 40],\r\n      },\r\n    ],\r\n    legend: [\r\n      { label: '2015', color: '#4A90E2' },\r\n      { label: '2016', color: '#50E3C2' },\r\n      { label: '2017', color: '#F5A623' },\r\n    ],\r\n    color: ['#4A90E2', '#50E3C2', '#F5A623'],\r\n    rightAxis: false,\r\n    rotateXAxis: 0,\r\n    valueLabelPosition: 'outside',\r\n    type: 'stacked',\r\n    legendPosition: 'bottom',\r\n    direction: 'horizontal',\r\n    fontSize: 12,\r\n    fontFamilly: 'normal',\r\n    styleTooltip: 'single',\r\n  },\r\n}"
             },
             {
-                "name": "Large",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/anemon/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
-            },
-            {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/anemon/src/stories/header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
-            },
-            {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/anemon/src/stories/page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = canvas.getByRole('button', { name: /Log in/i });\n    await expect(loginButton).toBeInTheDocument();\n    await userEvent.click(loginButton);\n    await expect(loginButton).not.toBeInTheDocument();\n\n    const logoutButton = canvas.getByRole('button', { name: /Log out/i });\n    await expect(logoutButton).toBeInTheDocument();\n  },\n}"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/anemon/src/stories/header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{}"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/anemon/src/stories/page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/anemon/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<ButtonComponent>",
-                "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\n  args: { onClick: fn() },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/anemon/src/stories/header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<HeaderComponent>",
-                "defaultValue": "{\n  title: 'Example/Header',\n  component: HeaderComponent,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs\n  tags: ['autodocs'],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n  args: {\n    onLogin: fn(),\n    onLogout: fn(),\n    onCreateAccount: fn(),\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/anemon/src/stories/page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<PageComponent>",
-                "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
-            },
-            {
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -219,6 +159,26 @@
                 "deprecationMessage": "",
                 "type": "Meta<BigNumberComponent>",
                 "defaultValue": "{\r\n  title: 'Big Number',\r\n  component: BigNumberComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    position: {\r\n      options: ['top', 'right', 'bottom', 'left'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'top' },\r\n      },\r\n    },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/anemon/src/lib/chart/gauge/gauge.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<GaugeComponent>",
+                "defaultValue": "{\r\n  title: 'Gauge',\r\n  component: GaugeComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    value: { control: { type: 'range', min: 0, max: 150, step: 1 } },\r\n    max: { control: 'number' },\r\n    label: { control: 'text' },\r\n    colorLevels: { control: 'object' },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/anemon/src/lib/chart/line/line.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<LineComponent>",
+                "defaultValue": "{\r\n  title: 'Line',\r\n  component: LineComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    // position: {\r\n    //   options: ['top', 'right', 'bottom', 'left'],\r\n    //   control: { type: 'radio' },\r\n    //   table: {\r\n    //     defaultValue: { summary: 'top' },\r\n    //   },\r\n    // },\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -284,16 +244,6 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/anemon/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/anemon/src/lib/core/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -324,16 +274,6 @@
                 "name": "Secondary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/anemon/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
-            },
-            {
-                "name": "Secondary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/anemon/src/lib/core/input/input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -349,16 +289,6 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<SelectComponent>",
                 "defaultValue": "{\r\n  name: 'Add ClassName',\r\n  args: {\r\n    title: 'Select',\r\n    options: [\r\n      { value: 'option1', label: 'Option 1' },\r\n      { value: 'option2', label: 'Option 2' },\r\n      { value: 'option3', label: 'Option 3' },\r\n    ],\r\n    value: 'option1',\r\n    classname:\r\n      'block w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded-full leading-tight',\r\n  },\r\n}"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/anemon/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
             },
             {
                 "name": "Stacked",
@@ -387,39 +317,6 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<ButtonComponent>",
-                "file": "projects/anemon/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<HeaderComponent>",
-                "file": "projects/anemon/src/stories/header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<PageComponent>",
-                "file": "projects/anemon/src/stories/page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
                 "rawtype": "StoryObj<BarChartComponent>",
                 "file": "projects/anemon/src/lib/chart/bar/bar.stories.ts",
                 "deprecated": false,
@@ -433,6 +330,28 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<BigNumberComponent>",
                 "file": "projects/anemon/src/lib/chart/big-number/big-number.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<GaugeComponent>",
+                "file": "projects/anemon/src/lib/chart/gauge/gauge.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<LineComponent>",
+                "file": "projects/anemon/src/lib/chart/line/line.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -579,6 +498,50 @@
                     "defaultValue": "{\r\n  title: 'Big Number',\r\n  component: BigNumberComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    position: {\r\n      options: ['top', 'right', 'bottom', 'left'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'top' },\r\n      },\r\n    },\r\n  },\r\n}"
                 }
             ],
+            "projects/anemon/src/lib/chart/gauge/gauge.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/anemon/src/lib/chart/gauge/gauge.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    value: 85,\r\n    max: 150,\r\n    label: 'Engine RPM',\r\n    colorLevels: [\r\n      { threshold: 60, color: '#4caf50' },\r\n      { threshold: 100, color: '#ffeb3b' },\r\n      { threshold: 150, color: '#f44336' },\r\n    ],\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/anemon/src/lib/chart/gauge/gauge.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<GaugeComponent>",
+                    "defaultValue": "{\r\n  title: 'Gauge',\r\n  component: GaugeComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    value: { control: { type: 'range', min: 0, max: 150, step: 1 } },\r\n    max: { control: 'number' },\r\n    label: { control: 'text' },\r\n    colorLevels: { control: 'object' },\r\n  },\r\n}"
+                }
+            ],
+            "projects/anemon/src/lib/chart/line/line.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/anemon/src/lib/chart/line/line.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    data: [\r\n      {\r\n        name: 'Series A',\r\n        points: [\r\n          { x: 0, y: 1 },\r\n          { x: 1, y: 3 },\r\n          { x: 2, y: 4 },\r\n          { x: 3, y: 1 },\r\n          { x: 4, y: 6 },\r\n          { x: 5, y: 5 },\r\n          { x: 6, y: 2 },\r\n          { x: 7, y: 1 },\r\n          { x: 8, y: 7 },\r\n          { x: 9, y: 9 },\r\n          { x: 10, y: 13 },\r\n          { x: 11, y: 3 },\r\n          { x: 12, y: 1 },\r\n          { x: 13, y: 4 },\r\n          { x: 14, y: 0 },\r\n          { x: 15, y: 3 },\r\n          { x: 16, y: 9 },\r\n        ],\r\n        color: '#007bff',\r\n      },\r\n      {\r\n        name: 'Series B',\r\n        points: [\r\n          { x: 0, y: 2 },\r\n          { x: 1, y: 4 },\r\n          { x: 2, y: 7 },\r\n          { x: null, y: null },\r\n          { x: 4, y: 7 },\r\n          { x: 5, y: 4 },\r\n          { x: 6, y: 2 },\r\n          { x: 7, y: 8 },\r\n          { x: 8, y: 10 },\r\n          { x: 9, y: 11 },\r\n          { x: 10, y: 1 },\r\n          { x: 11, y: 6 },\r\n          { x: 12, y: 5 },\r\n          { x: 13, y: 2 },\r\n          { x: 14, y: 1 },\r\n          { x: 15, y: 7 },\r\n          { x: 16, y: 5 },\r\n        ],\r\n        color: '#28a745',\r\n      },\r\n      {\r\n        name: 'Series C',\r\n        points: [\r\n          { x: 0, y: 3 },\r\n          { x: 1, y: 5 },\r\n          { x: 2, y: 3 },\r\n          { x: 3, y: 6 },\r\n          { x: 4, y: 8 },\r\n          { x: 5, y: 3 },\r\n          { x: 6, y: 1 },\r\n          { x: 7, y: 4 },\r\n          { x: 8, y: 0 },\r\n          { x: 9, y: 3 },\r\n          { x: 10, y: 9 },\r\n          { x: 11, y: 2 },\r\n          { x: 12, y: 8 },\r\n          { x: 13, y: 10 },\r\n          { x: 14, y: 11 },\r\n          { x: 15, y: 1 },\r\n          { x: 16, y: 10 },\r\n        ],\r\n        color: '#dc3545',\r\n      },\r\n    ],\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/anemon/src/lib/chart/line/line.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<LineComponent>",
+                    "defaultValue": "{\r\n  title: 'Line',\r\n  component: LineComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    // position: {\r\n    //   options: ['top', 'right', 'bottom', 'left'],\r\n    //   control: { type: 'radio' },\r\n    //   table: {\r\n    //     defaultValue: { summary: 'top' },\r\n    //   },\r\n    // },\r\n  },\r\n}"
+                }
+            ],
             "projects/anemon/src/lib/chart/pie-donut/pie-donut.stories.ts": [
                 {
                     "name": "Default",
@@ -709,122 +672,6 @@
                     "defaultValue": "{\r\n  args: {\r\n    classname: 'bg-blue-500 text-white ',\r\n    label: 'Button',\r\n  },\r\n}"
                 }
             ],
-            "projects/anemon/src/stories/button.stories.ts": [
-                {
-                    "name": "Large",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/anemon/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/anemon/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<ButtonComponent>",
-                    "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\n  args: { onClick: fn() },\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/anemon/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "Secondary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/anemon/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "Small",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/anemon/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
-                }
-            ],
-            "projects/anemon/src/stories/header.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/anemon/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/anemon/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/anemon/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<HeaderComponent>",
-                    "defaultValue": "{\n  title: 'Example/Header',\n  component: HeaderComponent,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs\n  tags: ['autodocs'],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n  args: {\n    onLogin: fn(),\n    onLogout: fn(),\n    onCreateAccount: fn(),\n  },\n}"
-                }
-            ],
-            "projects/anemon/src/stories/page.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/anemon/src/stories/page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = canvas.getByRole('button', { name: /Log in/i });\n    await expect(loginButton).toBeInTheDocument();\n    await userEvent.click(loginButton);\n    await expect(loginButton).not.toBeInTheDocument();\n\n    const logoutButton = canvas.getByRole('button', { name: /Log out/i });\n    await expect(logoutButton).toBeInTheDocument();\n  },\n}"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/anemon/src/stories/page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/anemon/src/stories/page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<PageComponent>",
-                    "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
-                }
-            ],
             "projects/anemon/src/lib/core/checkbox/checkbox.stories.tsx": [
                 {
                     "name": "meta",
@@ -885,45 +732,6 @@
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "projects/anemon/src/stories/button.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<ButtonComponent>",
-                    "file": "projects/anemon/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "projects/anemon/src/stories/header.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<HeaderComponent>",
-                    "file": "projects/anemon/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "projects/anemon/src/stories/page.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<PageComponent>",
-                    "file": "projects/anemon/src/stories/page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "projects/anemon/src/lib/chart/bar/bar.stories.ts": [
                 {
                     "name": "Story",
@@ -944,6 +752,32 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<BigNumberComponent>",
                     "file": "projects/anemon/src/lib/chart/big-number/big-number.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/anemon/src/lib/chart/gauge/gauge.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<GaugeComponent>",
+                    "file": "projects/anemon/src/lib/chart/gauge/gauge.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/anemon/src/lib/chart/line/line.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<LineComponent>",
+                    "file": "projects/anemon/src/lib/chart/line/line.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -1121,6 +955,66 @@
             },
             {
                 "filePath": "projects/anemon/src/lib/chart/big-number/big-number.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/gauge/gauge.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/gauge/gauge.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/gauge/gauge.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/line/line.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/line/line.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/line/line.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
@@ -1325,146 +1219,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Secondary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Large",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Primary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Secondary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Small",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/button.stories.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "Story",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/header.stories.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "Story",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/anemon/src/stories/page.stories.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "Story",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
