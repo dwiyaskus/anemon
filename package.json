@@ -10,7 +10,10 @@
     "build-library": "npm version patch & ng build anemon",
     "pack-lib": "cd dist/anemon && npm pack",
     "sb": "ng run anemon:storybook",
-    "build-storybook": "ng run anemon:build-storybook"
+    "build-sb": "ng run anemon:build-storybook",
+    "storybook-vercel": "start-storybook -p 6006 -s public",
+    "build-storybook-vercel": "build-storybook -s public",
+    "serve-storybook-vercel": "serve storybook-static"
   },
   "private": false,
   "dependencies": {
@@ -21,7 +24,6 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
-    "anemon": "file:dist/anemon/anemon-0.0.1.tgz",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
