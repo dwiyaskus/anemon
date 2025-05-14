@@ -1,0 +1,34 @@
+.gauge-container {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.gauge {
+  width: 100%;
+  height: auto;
+}
+
+.gauge-segment {
+  fill: none;
+  stroke-width: 10;
+}
+
+.needle {
+  stroke-width: 2;
+  transition: transform 0.5s ease-in-out;
+}
+
+.gauge-container g {
+  transition: transform 0.5s ease-in-out;
+}
+
+.gauge-label {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.gauge-description {
+  font-size: 14px;
+  color: #666;
+}

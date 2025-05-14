@@ -10,6 +10,7 @@ export * from './lib/anemon.module';
 export * from './lib/chart/bar/bar.component';
 export * from './lib/chart/big-number/big-number.component';
 export * from './lib/chart/pie-donut/pie-donut.component';
+export * from './lib/chart/line/line.component';
 
 
 /**

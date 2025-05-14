@@ -1,0 +1,165 @@
+<div class="chart-container">
+  <svg [attr.width]="width" [attr.height]="height">
+    <!-- Grid Lines and Axes -->
+    <line
+      *ngFor="let tick of yTicks"
+      [attr.x1]="margin.left"
+      [attr.y1]="
+        margin.top + (height - margin.top - margin.bottom) * (1 - tick / maxY)
+      "
+      [attr.x2]="width - margin.right"
+      [attr.y2]="
+        margin.top + (height - margin.top - margin.bottom) * (1 - tick / maxY)
+      "
+      class="grid-line"
+    ></line>
+
+    <line
+      *ngFor="let tick of xTicks"
+      [attr.x1]="
+        margin.left + (width - margin.left - margin.right) * (tick / maxX)
+      "
+      [attr.y1]="margin.top"
+      [attr.x2]="
+        margin.left + (width - margin.left - margin.right) * (tick / maxX)
+      "
+      [attr.y2]="height - margin.bottom"
+      class="grid-line"
+    ></line>
+
+    <!-- X-axis -->
+    <line
+      [attr.x1]="margin.left"
+      [attr.y1]="height - margin.bottom"
+      [attr.x2]="width - margin.right"
+      [attr.y2]="height - margin.bottom"
+      class="axis"
+    ></line>
+
+    <!-- Y-axis Left -->
+    <line
+      [attr.x1]="margin.left"
+      [attr.y1]="margin.top"
+      [attr.x2]="margin.left"
+      [attr.y2]="height - margin.bottom"
+      class="axis"
+    ></line>
+
+    <!-- Y-axis Right -->
+    <line
+      [attr.x1]="width - margin.right"
+      [attr.y1]="margin.top"
+      [attr.x2]="width - margin.right"
+      [attr.y2]="height - margin.bottom"
+      class="axis"
+    ></line>
+
+    <!-- Labels -->
+    <text
+      *ngFor="let tick of xLabel; let i = index"
+      [attr.x]="20 + (i + 0.5) * ((width - margin.right) / xLabel.length)"
+      [attr.y]="height - margin.bottom + 15"
+      class="tick-label"
+    >
+      {{ tick }}
+    </text>
+
+    <text
+      *ngFor="let tick of yTicks"
+      [attr.x]="margin.left - 10"
+      [attr.y]="
+        margin.top +
+        (height - margin.top - margin.bottom) * (1 - tick / maxY) +
+        5
+      "
+      class="tick-label"
+      [style.text-anchor]="'end'"
+    >
+      {{ tick }}
+    </text>
+
+    <text
+      *ngFor="let tick of yTicks"
+      [attr.x]="width - margin.right + 5"
+      [attr.y]="
+        margin.top +
+        (height - margin.top - margin.bottom) * (1 - tick / maxY) +
+        5
+      "
+      class="tick-label"
+      [style.text-anchor]="'start'"
+    >
+      {{ tick }}
+    </text>
+
+    <!-- Lines -->
+    <ng-container *ngFor="let dataset of scaledData">
+      <polyline
+        *ngFor="let segment of dataset.segments"
+        [attr.points]="segment.pointsString"
+        class="line-path"
+        [attr.stroke]="segment.color"
+      ></polyline>
+    </ng-container>
+
+    <!-- Points -->
+    <!-- <ng-container *ngFor="let dataset of scaledData">
+      <circle
+        *ngFor="let point of dataset.points"
+        [attr.cx]="point.x"
+        [attr.cy]="point.y"
+        r="4"
+        [attr.fill]="dataset.color"
+        class="data-point"
+      ></circle>
+    </ng-container> -->
+  </svg>
+</div>
+
+<!-- <div class="chart-container" [style.width.px]="width" [style.height.px]="height">
+  <svg [attr.width]="width" [attr.height]="height">
+    <!-- Grid Lines and Y-axis
+    <line *ngFor="let tick of yTicks"
+          [attr.x1]="margin.left" 
+          [attr.y1]="margin.top + (height - margin.top - margin.bottom) * (1 - tick / maxY)"
+          [attr.x2]="width - margin.right" 
+          [attr.y2]="margin.top + (height - margin.top - margin.bottom) * (1 - tick / maxY)"
+          class="grid-line"></line>
+
+    <!-- X-axis
+    <line [attr.x1]="margin.left" [attr.y1]="height - margin.bottom" 
+          [attr.x2]="width - margin.right" [attr.y2]="height - margin.bottom" 
+          class="axis"></line>
+    
+    <!-- Y-axis 
+    <line [attr.x1]="margin.left" [attr.y1]="margin.top" 
+          [attr.x2]="margin.left" [attr.y2]="height - margin.bottom" 
+          class="axis"></line>
+
+    <!-- Y-axis Labels
+    <text *ngFor="let tick of yTicks"
+          [attr.x]="margin.left - 10"
+          [attr.y]="margin.top + (height - margin.top - margin.bottom) * (1 - tick / maxY) + 5"
+          class="tick-label">{{ tick }}</text>
+
+    <!-- X-axis Labels
+    <text *ngFor="let label of xLabels; let i = index"
+          [attr.x]="margin.left + (i + 0.5) * ((width - margin.left - margin.right) / xLabels.length)"
+          [attr.y]="height - margin.bottom + 15"
+          class="tick-label">{{ label }}</text>
+
+    <!-- Lines 
+    <polyline *ngFor="let dataset of scaledData"
+              [attr.points]="dataset.pointsString"
+              class="line-path"
+              [attr.stroke]="getColor(dataset.name)"></polyline>
+
+    <!-- Points 
+    <ng-container *ngFor="let dataset of scaledData">
+      <circle *ngFor="let point of dataset.points"
+              [attr.cx]="point.x" [attr.cy]="point.y" r="4"
+              [attr.fill]="getColor(dataset.name)"
+              class="data-point"></circle>
+    </ng-container>
+  </svg>
+</div> -->
