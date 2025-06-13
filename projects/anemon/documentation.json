@@ -14,6 +14,16 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  name: 'Vertical',\r\n  args: {\r\n    stacked: false,\r\n    orientation: 'vertical',\r\n    legendPosition: 'bottom',\r\n    labels: ['Porsche', 'Mercedes-Benz', 'Dodge', 'Audi', 'Jaguar'],\r\n    datasets: [\r\n      {\r\n        label: 'Horsepower (Avg)',\r\n        data: [\r\n          321.14285714285717, 278.6923076923077, 209.69230769230768,\r\n          250.78947368421052, 307,\r\n        ],\r\n        color: '#3498db',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'EngineSize (Max)',\r\n        data: [4.5, 5.5, 8.3, 4.2, 4.2],\r\n        color: '#2ecc71',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'Horsepower (Max)',\r\n        data: [477, 493, 500, 450, 390],\r\n        color: '#e74c3c',\r\n        type: 'line',\r\n      },\r\n    ],\r\n    withLine: true,\r\n    tooltipType: 'full'\r\n  },\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/anemon/src/lib/chart/bar/bar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -38,7 +48,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    value: 85,\r\n    max: 150,\r\n    label: 'Engine RPM',\r\n    colorLevels: [\r\n      { threshold: 60, color: '#4caf50' },\r\n      { threshold: 100, color: '#ffeb3b' },\r\n      { threshold: 150, color: '#f44336' },\r\n    ],\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    value: 85,\r\n    max: 400,\r\n    label: 'Engine RPM',\r\n    colorLevels: [\r\n      { threshold: 60, color: '#4caf50' },\r\n      { threshold: 200, color: '#ffeb3b' },\r\n      { threshold: 250, color: '#f44336' },\r\n      { threshold: 400, color: '#Ffc0cb' },\r\n    ],\r\n  },\r\n}"
             },
             {
                 "name": "Default",
@@ -58,7 +68,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    type: 'pie',\r\n    data: [300, 500, 100],\r\n    labels: ['Red', 'Blue', 'Yellow'],\r\n    colors: ['#FF6384', '#36A2EB', '#FFCE56'],\r\n    label: 'Total: 900',\r\n    legendPosition: 'bottom', // Options: 'top', 'bottom', 'left', 'right'\r\n    radius: 100,\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    legendPosition: 'top left',\r\n    legendOrientation: 'vertical',\r\n    data: [\r\n      { label: 'A', value: 40, color: '#FF6384' },\r\n      { label: 'B', value: 25, color: '#36A2EB' },\r\n      { label: 'C', value: 20, color: '#FFCE56' },\r\n      { label: 'D', value: 15, color: '#4BC0C0' },\r\n    ],\r\n    width: 600,\r\n    height: 600,\r\n    donut: false,\r\n    fontInnerText: 18,\r\n    innerText: '',\r\n    innerRadius: 0,\r\n    radius: 150,\r\n  },\r\n}"
             },
             {
                 "name": "Default",
@@ -114,6 +124,16 @@
                 "name": "Horizontal",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  name: 'Horizontal',\r\n  args: {\r\n    stacked: false,\r\n    orientation: 'horizontal',\r\n    legendPosition: 'bottom',\r\n      labels: ['Porsche', 'Mercedes-Benz', 'Dodge', 'Audi', 'Jaguar'],\r\n    datasets: [\r\n      {\r\n        label: 'Horsepower (Avg)',\r\n        data: [\r\n          321.14285714285717, 278.6923076923077, 209.69230769230768,\r\n          250.78947368421052, 307,\r\n        ],\r\n        color: '#3498db',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'EngineSize (Max)',\r\n        data: [4.5, 5.5, 8.3, 4.2, 4.2],\r\n        color: '#2ecc71',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'Horsepower (Max)',\r\n        data: [477, 493, 500, 450, 390],\r\n        color: '#e74c3c',\r\n        type: 'line',\r\n      },\r\n    ],\r\n    tooltipType: 'single'\r\n  },\r\n}"
+            },
+            {
+                "name": "Horizontal",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/anemon/src/lib/chart/bar/bar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -144,6 +164,16 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<BarCanvasComponent>",
+                "defaultValue": "{\r\n  title: 'Bar Canvas Chart',\r\n  component: BarCanvasComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    stacked: {\r\n      control: { type: 'boolean' },\r\n    },\r\n    orientation: {\r\n      options: ['vertical', 'horizontal'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'vertical' },\r\n      },\r\n    },\r\n\r\n    legendPosition: {\r\n      options: ['bottom', 'top', 'left', 'right'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'bottom' },\r\n      },\r\n    },\r\n    tooltipType: {\r\n      options: ['single', 'full'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'single' },\r\n      },\r\n    },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/anemon/src/lib/chart/bar/bar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -168,7 +198,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<GaugeComponent>",
-                "defaultValue": "{\r\n  title: 'Gauge',\r\n  component: GaugeComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    value: { control: { type: 'range', min: 0, max: 150, step: 1 } },\r\n    max: { control: 'number' },\r\n    label: { control: 'text' },\r\n    colorLevels: { control: 'object' },\r\n  },\r\n}"
+                "defaultValue": "{\r\n  title: 'Gauge',\r\n  component: GaugeComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    value: { control: { type: 'range', min: 0, max: 400, step: 1 } },\r\n    max: { control: 'number' },\r\n    label: { control: 'text' },\r\n    colorLevels: { control: 'object' },\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -188,7 +218,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<PieComponent>",
-                "defaultValue": "{\r\n  title: 'Pie',\r\n  component: PieComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    type: {\r\n      options: ['pie', 'donut'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'pie' },\r\n      },\r\n    },\r\n    legendPosition: {\r\n      options: ['top', 'right', 'bottom', 'left'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'bottom' },\r\n      },\r\n    },\r\n  },\r\n}"
+                "defaultValue": "{\r\n  title: 'Pie',\r\n  component: PieComponent,\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    legendOrientation: {\r\n      options: ['vertical', 'horizontal'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'vertical' },\r\n      },\r\n    },\r\n\r\n    legendPosition: {\r\n      options: ['bottom', 'top', 'left', 'right'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'bottom' },\r\n      },\r\n    },\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -301,6 +331,36 @@
                 "defaultValue": "{\r\n  name: 'Vertical Stack',\r\n  args: {\r\n    data: [\r\n      {\r\n        label: 'Matcha Latte',\r\n        values: [40, 80, 90],\r\n      },\r\n      {\r\n        label: 'Milk Tea',\r\n        values: [60, 70, 100],\r\n      },\r\n      {\r\n        label: 'Cheese Cocoa',\r\n        values: [80, 60, 90],\r\n      },\r\n      {\r\n        label: 'Walnut Brownie',\r\n        values: [90, 50, 40],\r\n      },\r\n    ],\r\n    legend: [\r\n      { label: '2015', color: '#4A90E2' },\r\n      { label: '2016', color: '#50E3C2' },\r\n      { label: '2017', color: '#F5A623' },\r\n    ],\r\n    color: ['#4A90E2', '#50E3C2', '#F5A623'],\r\n    rightAxis: false,\r\n    rotateXAxis: 0,\r\n    valueLabelPosition: 'outside',\r\n    type: 'stacked',\r\n    legendPosition: 'bottom',\r\n    direction: 'vertical',\r\n    fontSize: 12,\r\n    fontFamilly: 'normal',\r\n    styleTooltip: 'single',\r\n  },\r\n}"
             },
             {
+                "name": "StackedHorizontal",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  name: 'Stacked Horizontal',\r\n  args: {\r\n    stacked: true,\r\n    orientation: 'horizontal',\r\n    legendPosition: 'bottom',\r\n      labels: ['Porsche', 'Mercedes-Benz', 'Dodge', 'Audi', 'Jaguar'],\r\n    datasets: [\r\n      {\r\n        label: 'Horsepower (Avg)',\r\n        data: [\r\n          321.14285714285717, 278.6923076923077, 209.69230769230768,\r\n          250.78947368421052, 307,\r\n        ],\r\n        color: '#3498db',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'EngineSize (Max)',\r\n        data: [4.5, 5.5, 8.3, 4.2, 4.2],\r\n        color: '#2ecc71',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'Horsepower (Max)',\r\n        data: [477, 493, 500, 450, 390],\r\n        color: '#e74c3c',\r\n        type: 'line',\r\n      },\r\n    ],\r\n    tooltipType: 'full'\r\n  },\r\n}"
+            },
+            {
+                "name": "StackedVertical",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  name: 'Stacked Vertical',\r\n  args: {\r\n    stacked: true,\r\n    orientation: 'vertical',\r\n    legendPosition: 'bottom',\r\n      labels: ['Porsche', 'Mercedes-Benz', 'Dodge', 'Audi', 'Jaguar'],\r\n    datasets: [\r\n      {\r\n        label: 'Horsepower (Avg)',\r\n        data: [\r\n          321.14285714285717, 278.6923076923077, 209.69230769230768,\r\n          250.78947368421052, 307,\r\n        ],\r\n        color: '#3498db',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'EngineSize (Max)',\r\n        data: [4.5, 5.5, 8.3, 4.2, 4.2],\r\n        color: '#2ecc71',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'Horsepower (Max)',\r\n        data: [477, 493, 500, 450, 390],\r\n        color: '#e74c3c',\r\n        type: 'line',\r\n      },\r\n    ],\r\n    tooltipType: 'single'\r\n  },\r\n}"
+            },
+            {
+                "name": "Vertical",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  name: 'Vertical Custom',\r\n  args: {\r\n    stacked: false,\r\n    orientation: 'vertical',\r\n    legendPosition: \"bottom\",\r\n    labels: ['Porsche', 'Mercedes-Benz', 'Dodge', 'Audi', 'Jaguar'],\r\n    datasets: [\r\n      {\r\n        label: 'Horsepower (Avg)',\r\n        data: [\r\n          321.14285714285717, 278.6923076923077, 209.69230769230768,\r\n          250.78947368421052, 307,\r\n        ],\r\n        color: '#3498db',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'EngineSize (Max)',\r\n        data: [4.5, 5.5, 8.3, 4.2, 4.2],\r\n        color: '#2ecc71',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'Horsepower (Max)',\r\n        data: [477, 493, 500, 450, 390],\r\n        color: '#e74c3c',\r\n        type: 'line',\r\n      },\r\n    ],\r\n    withLine: true,\r\n    tooltipType: 'single'\r\n  },\r\n}"
+            },
+            {
                 "name": "Vertical",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -313,6 +373,17 @@
         ],
         "functions": [],
         "typealiases": [
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<BarCanvasComponent>",
+                "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
             {
                 "name": "Story",
                 "ctype": "miscellaneous",
@@ -404,6 +475,68 @@
         ],
         "enumerations": [],
         "groupedVariables": {
+            "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  name: 'Vertical',\r\n  args: {\r\n    stacked: false,\r\n    orientation: 'vertical',\r\n    legendPosition: 'bottom',\r\n    labels: ['Porsche', 'Mercedes-Benz', 'Dodge', 'Audi', 'Jaguar'],\r\n    datasets: [\r\n      {\r\n        label: 'Horsepower (Avg)',\r\n        data: [\r\n          321.14285714285717, 278.6923076923077, 209.69230769230768,\r\n          250.78947368421052, 307,\r\n        ],\r\n        color: '#3498db',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'EngineSize (Max)',\r\n        data: [4.5, 5.5, 8.3, 4.2, 4.2],\r\n        color: '#2ecc71',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'Horsepower (Max)',\r\n        data: [477, 493, 500, 450, 390],\r\n        color: '#e74c3c',\r\n        type: 'line',\r\n      },\r\n    ],\r\n    withLine: true,\r\n    tooltipType: 'full'\r\n  },\r\n}"
+                },
+                {
+                    "name": "Horizontal",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  name: 'Horizontal',\r\n  args: {\r\n    stacked: false,\r\n    orientation: 'horizontal',\r\n    legendPosition: 'bottom',\r\n      labels: ['Porsche', 'Mercedes-Benz', 'Dodge', 'Audi', 'Jaguar'],\r\n    datasets: [\r\n      {\r\n        label: 'Horsepower (Avg)',\r\n        data: [\r\n          321.14285714285717, 278.6923076923077, 209.69230769230768,\r\n          250.78947368421052, 307,\r\n        ],\r\n        color: '#3498db',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'EngineSize (Max)',\r\n        data: [4.5, 5.5, 8.3, 4.2, 4.2],\r\n        color: '#2ecc71',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'Horsepower (Max)',\r\n        data: [477, 493, 500, 450, 390],\r\n        color: '#e74c3c',\r\n        type: 'line',\r\n      },\r\n    ],\r\n    tooltipType: 'single'\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<BarCanvasComponent>",
+                    "defaultValue": "{\r\n  title: 'Bar Canvas Chart',\r\n  component: BarCanvasComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    stacked: {\r\n      control: { type: 'boolean' },\r\n    },\r\n    orientation: {\r\n      options: ['vertical', 'horizontal'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'vertical' },\r\n      },\r\n    },\r\n\r\n    legendPosition: {\r\n      options: ['bottom', 'top', 'left', 'right'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'bottom' },\r\n      },\r\n    },\r\n    tooltipType: {\r\n      options: ['single', 'full'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'single' },\r\n      },\r\n    },\r\n  },\r\n}"
+                },
+                {
+                    "name": "StackedHorizontal",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  name: 'Stacked Horizontal',\r\n  args: {\r\n    stacked: true,\r\n    orientation: 'horizontal',\r\n    legendPosition: 'bottom',\r\n      labels: ['Porsche', 'Mercedes-Benz', 'Dodge', 'Audi', 'Jaguar'],\r\n    datasets: [\r\n      {\r\n        label: 'Horsepower (Avg)',\r\n        data: [\r\n          321.14285714285717, 278.6923076923077, 209.69230769230768,\r\n          250.78947368421052, 307,\r\n        ],\r\n        color: '#3498db',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'EngineSize (Max)',\r\n        data: [4.5, 5.5, 8.3, 4.2, 4.2],\r\n        color: '#2ecc71',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'Horsepower (Max)',\r\n        data: [477, 493, 500, 450, 390],\r\n        color: '#e74c3c',\r\n        type: 'line',\r\n      },\r\n    ],\r\n    tooltipType: 'full'\r\n  },\r\n}"
+                },
+                {
+                    "name": "StackedVertical",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  name: 'Stacked Vertical',\r\n  args: {\r\n    stacked: true,\r\n    orientation: 'vertical',\r\n    legendPosition: 'bottom',\r\n      labels: ['Porsche', 'Mercedes-Benz', 'Dodge', 'Audi', 'Jaguar'],\r\n    datasets: [\r\n      {\r\n        label: 'Horsepower (Avg)',\r\n        data: [\r\n          321.14285714285717, 278.6923076923077, 209.69230769230768,\r\n          250.78947368421052, 307,\r\n        ],\r\n        color: '#3498db',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'EngineSize (Max)',\r\n        data: [4.5, 5.5, 8.3, 4.2, 4.2],\r\n        color: '#2ecc71',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'Horsepower (Max)',\r\n        data: [477, 493, 500, 450, 390],\r\n        color: '#e74c3c',\r\n        type: 'line',\r\n      },\r\n    ],\r\n    tooltipType: 'single'\r\n  },\r\n}"
+                },
+                {
+                    "name": "Vertical",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  name: 'Vertical Custom',\r\n  args: {\r\n    stacked: false,\r\n    orientation: 'vertical',\r\n    legendPosition: \"bottom\",\r\n    labels: ['Porsche', 'Mercedes-Benz', 'Dodge', 'Audi', 'Jaguar'],\r\n    datasets: [\r\n      {\r\n        label: 'Horsepower (Avg)',\r\n        data: [\r\n          321.14285714285717, 278.6923076923077, 209.69230769230768,\r\n          250.78947368421052, 307,\r\n        ],\r\n        color: '#3498db',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'EngineSize (Max)',\r\n        data: [4.5, 5.5, 8.3, 4.2, 4.2],\r\n        color: '#2ecc71',\r\n        type: 'bar',\r\n      },\r\n      {\r\n        label: 'Horsepower (Max)',\r\n        data: [477, 493, 500, 450, 390],\r\n        color: '#e74c3c',\r\n        type: 'line',\r\n      },\r\n    ],\r\n    withLine: true,\r\n    tooltipType: 'single'\r\n  },\r\n}"
+                }
+            ],
             "projects/anemon/src/lib/chart/bar/bar.stories.ts": [
                 {
                     "name": "Default",
@@ -507,7 +640,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    value: 85,\r\n    max: 150,\r\n    label: 'Engine RPM',\r\n    colorLevels: [\r\n      { threshold: 60, color: '#4caf50' },\r\n      { threshold: 100, color: '#ffeb3b' },\r\n      { threshold: 150, color: '#f44336' },\r\n    ],\r\n  },\r\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    value: 85,\r\n    max: 400,\r\n    label: 'Engine RPM',\r\n    colorLevels: [\r\n      { threshold: 60, color: '#4caf50' },\r\n      { threshold: 200, color: '#ffeb3b' },\r\n      { threshold: 250, color: '#f44336' },\r\n      { threshold: 400, color: '#Ffc0cb' },\r\n    ],\r\n  },\r\n}"
                 },
                 {
                     "name": "meta",
@@ -517,7 +650,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<GaugeComponent>",
-                    "defaultValue": "{\r\n  title: 'Gauge',\r\n  component: GaugeComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    value: { control: { type: 'range', min: 0, max: 150, step: 1 } },\r\n    max: { control: 'number' },\r\n    label: { control: 'text' },\r\n    colorLevels: { control: 'object' },\r\n  },\r\n}"
+                    "defaultValue": "{\r\n  title: 'Gauge',\r\n  component: GaugeComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    value: { control: { type: 'range', min: 0, max: 400, step: 1 } },\r\n    max: { control: 'number' },\r\n    label: { control: 'text' },\r\n    colorLevels: { control: 'object' },\r\n  },\r\n}"
                 }
             ],
             "projects/anemon/src/lib/chart/line/line.stories.ts": [
@@ -551,7 +684,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    type: 'pie',\r\n    data: [300, 500, 100],\r\n    labels: ['Red', 'Blue', 'Yellow'],\r\n    colors: ['#FF6384', '#36A2EB', '#FFCE56'],\r\n    label: 'Total: 900',\r\n    legendPosition: 'bottom', // Options: 'top', 'bottom', 'left', 'right'\r\n    radius: 100,\r\n  },\r\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    legendPosition: 'top left',\r\n    legendOrientation: 'vertical',\r\n    data: [\r\n      { label: 'A', value: 40, color: '#FF6384' },\r\n      { label: 'B', value: 25, color: '#36A2EB' },\r\n      { label: 'C', value: 20, color: '#FFCE56' },\r\n      { label: 'D', value: 15, color: '#4BC0C0' },\r\n    ],\r\n    width: 600,\r\n    height: 600,\r\n    donut: false,\r\n    fontInnerText: 18,\r\n    innerText: '',\r\n    innerRadius: 0,\r\n    radius: 150,\r\n  },\r\n}"
                 },
                 {
                     "name": "meta",
@@ -561,7 +694,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<PieComponent>",
-                    "defaultValue": "{\r\n  title: 'Pie',\r\n  component: PieComponent,\r\n  //👇 Our exports that end in \"Data\" are not stories.\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    type: {\r\n      options: ['pie', 'donut'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'pie' },\r\n      },\r\n    },\r\n    legendPosition: {\r\n      options: ['top', 'right', 'bottom', 'left'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'bottom' },\r\n      },\r\n    },\r\n  },\r\n}"
+                    "defaultValue": "{\r\n  title: 'Pie',\r\n  component: PieComponent,\r\n  excludeStories: /.*Data$/,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n  argTypes: {\r\n    legendOrientation: {\r\n      options: ['vertical', 'horizontal'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'vertical' },\r\n      },\r\n    },\r\n\r\n    legendPosition: {\r\n      options: ['bottom', 'top', 'left', 'right'],\r\n      control: { type: 'radio' },\r\n      table: {\r\n        defaultValue: { summary: 'bottom' },\r\n      },\r\n    },\r\n  },\r\n}"
                 }
             ],
             "projects/anemon/src/lib/core/input/input.stories.ts": [
@@ -732,6 +865,19 @@
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
+            "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<BarCanvasComponent>",
+                    "file": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "projects/anemon/src/lib/chart/bar/bar.stories.ts": [
                 {
                     "name": "Story",
@@ -849,6 +995,76 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "preview",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Horizontal",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "StackedHorizontal",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "StackedVertical",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Vertical",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/anemon/src/lib/chart/bar/bar-canvas.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

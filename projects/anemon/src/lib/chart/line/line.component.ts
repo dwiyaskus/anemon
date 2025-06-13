@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'anemon-line',
-    imports:[CommonModule],
+  imports:[CommonModule],
   templateUrl: './line.component.html',
   styleUrls: ['./line.component.css'],
 })

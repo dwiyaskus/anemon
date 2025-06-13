@@ -12,7 +12,7 @@ import { BarConfig, Basic } from '../../types';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'anemon-bar',
+  selector: 'app-bar-chart',
   imports:[CommonModule],
   templateUrl: 'bar.component.html',
   styleUrls: ['bar.component.css'],

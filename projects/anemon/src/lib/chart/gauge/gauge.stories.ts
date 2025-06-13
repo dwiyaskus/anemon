@@ -9,7 +9,7 @@ const meta: Meta<GaugeComponent> = {
   tags: ['autodocs'],
   args: {},
   argTypes: {
-    value: { control: { type: 'range', min: 0, max: 200, step: 1 } },
+    value: { control: { type: 'range', min: 0, max: 400, step: 1 } },
     max: { control: 'number' },
     label: { control: 'text' },
     colorLevels: { control: 'object' },
@@ -22,13 +22,13 @@ type Story = StoryObj<GaugeComponent>;
 export const Default: Story = {
   args: {
     value: 85,
-    max: 200,
+    max: 400,
     label: 'Engine RPM',
     colorLevels: [
       { threshold: 60, color: '#4caf50' },
-      { threshold: 100, color: '#ffeb3b' },
-      { threshold: 150, color: '#f44336' },
-      { threshold: 200, color: '#Ffc0cb' },
+      { threshold: 200, color: '#ffeb3b' },
+      { threshold: 250, color: '#f44336' },
+      { threshold: 400, color: '#Ffc0cb' },
     ],
   },
 };
