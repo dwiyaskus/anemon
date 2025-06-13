@@ -1,544 +1,288 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  Input,
-  AfterViewInit,
   ElementRef,
+  HostListener,
   ViewChild,
+  AfterViewInit,
+  Input,
+  OnInit,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+interface Slice {
+  label: string;
+  value: number;
+  color: string;
+  startAngle?: number;
+  endAngle?: number;
+  offsetX?: number;
+  offsetY?: number;
+  hidden?: boolean;
+  selected?: boolean;
+}
 
 @Component({
   selector: 'anemon-pie',
-  imports:[CommonModule],
-  templateUrl: 'pie-donut.component.html',
-  styleUrls: ['pie-donut.component.css'],
+  imports: [CommonModule, FormsModule],
+  templateUrl: './pie-donut.component.html',
+  styleUrls: ['./pie-donut.component.css'],
 })
-export class PieComponent implements AfterViewInit {
-  @Input() data: number[] = [];
-  @Input() labels: string[] = [];
-  @Input() colors: string[] = [];
-  @Input() label: string = ''; // Central label
-  @Input() legendPosition: 'top' | 'bottom' | 'left' | 'right' = 'bottom'; // Legend position
-  @Input() type: 'pie' | 'donut' = 'pie';
-  @Input() radius: number = 100;
-  @Input() allowTooltip: boolean = true;
-  @Input() chartOnClick: boolean = false;
+export class PieComponent implements AfterViewInit, OnInit {
+  @ViewChild('canvas', { static: true })
+  canvasRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('tooltip', { static: true })
+  tooltipRef!: ElementRef<HTMLDivElement>;
 
-  @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
+  @Input() width?: number;
+  @Input() height?: number;
+  @Input() donut?: boolean;
+  @Input() radius: number = 150;
+  @Input() innerRadius: number = 120;
+  @Input() innerText: string = '';
+  @Input() fontInnerText: number = 18; // selalu dalam px
+  @Input() data: Slice[] = [];
+  @Input() legendPosition:
+    | 'left'
+    | 'right'
+    | 'top left'
+    | 'top right'
+    | 'top'
+    | 'bottom left'
+    | 'bottom right'
+    | 'bottom' = 'left';
+  @Input() legendOrientation: 'vertical' | 'horizontal' = 'vertical';
+  private slices: Slice[] = [];
+  private selectedSliceIndex: number | null = null;
+  private ctx!: CanvasRenderingContext2D;
+  private centerX = 250;
+  private centerY = 250;
+  private total = 0;
+  public containerCanvas: any;
+  private hoveredSliceIndex: number | null = null;
+
   ngAfterViewInit() {
-    if (this.type === 'donut') {
-      this.drawDonutChart();
-    } else {
-      this.drawPieChart();
+    const canvas = this.canvasRef.nativeElement;
+    const container = canvas.parentElement!;
+    this.containerCanvas = container;
+    // Jika tidak disetel manual, ambil ukuran dari container
+    const computedWidth = this.width ?? container.clientWidth;
+    const computedHeight = this.height ?? container.clientHeight;
+    // Set canvas element's width and height attributes
+    canvas.width = computedWidth;
+    canvas.height = computedHeight;
+    this.ctx = canvas.getContext('2d')!;
+    this.centerX = canvas.width / 2;
+    this.centerY = canvas.height / 2;
+    this.drawChart();
+  }
+  ngOnInit() {
+    let obj = [];
+    for (let index = 0; index < this.data.length; index++) {
+      const element = this.data[index];
+      obj.push({ ...element, hidden: false });
     }
+
+    this.data = obj;
   }
 
-  private drawDonutChart() {
-    const canvas = this.canvas.nativeElement;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const total = this.data.reduce((sum, value) => sum + value, 0);
+  drawChart() {
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, Number(this.width), Number(this.height));
     let startAngle = 0;
+    this.slices = [];
+    this.total = this.data
+      .filter((d) => d.hidden === false)
+      .reduce((sum, d) => sum + d.value, 0);
 
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = 200;
-    const innerRadius = this.radius; // For the donut effect
+    this.data.forEach((d, i) => {
+      if (d.hidden) return;
+      const sliceAngle = (d.value / this.total) * 2 * Math.PI;
+      const endAngle = startAngle + sliceAngle;
+      const midAngle = (startAngle + endAngle) / 2;
+      const offset = this.selectedSliceIndex === i ? 10 : 0;
+      const offsetX = Math.cos(midAngle) * offset;
+      const offsetY = Math.sin(midAngle) * offset;
 
-    // Draw each segment
-    this.data.forEach((value, index) => {
-      const sliceAngle = (value / total) * 2 * Math.PI;
+      // Apply opacity to other slices if a slice is selected
+      const selected =
+        this.selectedSliceIndex !== null && this.selectedSliceIndex !== i;
 
-      // Draw the outer pie slice
+      const isHovered = this.hoveredSliceIndex === i;
+
+      // Tambahkan efek highlight jika sedang di-hover
+      if (isHovered) {
+        ctx.save();
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+        ctx.shadowBlur = 10;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+      }
+
+      // Draw slice
       ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+      ctx.moveTo(this.centerX + offsetX, this.centerY + offsetY);
       ctx.arc(
-        centerX,
-        centerY,
-        innerRadius,
-        startAngle + sliceAngle,
+        this.centerX + offsetX,
+        this.centerY + offsetY,
+        this.radius,
         startAngle,
-        true
+        endAngle
       );
-      ctx.closePath();
-
-      // Fill with color
-      ctx.fillStyle = this.colors[index];
+      ctx.lineTo(this.centerX + offsetX, this.centerY + offsetY);
+      ctx.fillStyle = d.color;
+      ctx.globalAlpha = selected ? 0.2 : 1;
       ctx.fill();
 
-      startAngle += sliceAngle;
+      this.slices.push({
+        ...d,
+        startAngle,
+        endAngle,
+        offsetX,
+        offsetY,
+        selected,
+      });
+      startAngle = endAngle;
+      if (isHovered) {
+        ctx.restore(); // remove shadow after drawing slice
+      }
+    });
+
+    // Donut hole
+    if (this.donut) {
+      ctx.globalAlpha = 1;
+      ctx.beginPath();
+      ctx.arc(this.centerX, this.centerY, this.innerRadius, 0, 2 * Math.PI);
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+
+      // 🧠 Draw center text
+      ctx.globalAlpha = 1; // pastikan tidak transparan
+      ctx.fillStyle = '#000';
+      ctx.font = `bold ${this.fontInnerText}px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(
+        this.innerText ? this.innerText : `${this.total}`,
+        this.centerX,
+        this.centerY
+      );
+    }
+
+    ctx.globalAlpha = 1; // pastikan tidak transparan
+    this.slices.forEach((slice) => {
+      const midAngle = (slice.startAngle! + slice.endAngle!) / 2;
+
+      const fromX =
+        this.centerX + slice.offsetX! + this.radius * Math.cos(midAngle);
+      const fromY =
+        this.centerY + slice.offsetY! + this.radius * Math.sin(midAngle);
+
+      // Tentukan arah label: kiri (-1) atau kanan (1)
+      const direction =
+        midAngle > Math.PI / 2 && midAngle < (3 * Math.PI) / 2 ? -1 : 1;
+
+      // Diagonal keluar dari slice
+      const diagLength = 35;
+      const diagX = fromX + diagLength * Math.cos(midAngle);
+      const diagY = fromY + diagLength * Math.sin(midAngle);
+
+      // Horizontal siku ke kanan atau kiri
+      const horizX = diagX + direction * 25;
+      const horizY = diagY;
+
+      // Posisi label
+      const labelX = horizX + (direction === -1 ? -20 : 10);
+      const labelY = horizY;
+
+      // Draw leader line (2 segmen: diagonal + horizontal)
+      ctx.strokeStyle = slice.selected ? '#3333' : slice.color;
+      ctx.beginPath();
+      ctx.moveTo(fromX, fromY); // titik dari pie
+      ctx.lineTo(diagX, diagY); // diagonal keluar
+      ctx.lineTo(horizX, horizY); // siku horizontal
+      ctx.stroke();
+
+      // Draw label
+      ctx.fillStyle = slice.selected ? '#3333' : '#333';
+      ctx.font = '14px sans-serif';
+      ctx.fillText(slice.label, labelX, labelY);
     });
   }
 
-  // private drawPieChart() {
-  //   const canvas = this.canvas.nativeElement;
-  //   const ctx = canvas.getContext('2d');
-  //   if (!ctx) return;
+  @HostListener('mousemove', ['$event'])
+  onMouseMove(event: MouseEvent) {
+    const rect = this.canvasRef.nativeElement.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const dx = x - this.centerX;
+    const dy = y - this.centerY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx);
+    const normAngle = angle >= 0 ? angle : 2 * Math.PI + angle;
 
-  //   const total = this.data.reduce((sum, value) => sum + value, 0);
-  //   let startAngle = 0;
+    const tooltip = this.tooltipRef.nativeElement;
+    let found = false;
+    let hoveredIndex: number | null = null;
 
-  //   this.data.forEach((value, index) => {
-  //     const sliceAngle = (value / total) * 2 * Math.PI;
+    this.slices.forEach((slice, index) => {
+      if (
+        dist >= this.innerRadius &&
+        dist <= this.radius &&
+        normAngle >= slice.startAngle! &&
+        normAngle <= slice.endAngle!
+      ) {
+        tooltip.style.display = 'block';
+        tooltip.style.left = `${event.clientX + 10}px`;
+        tooltip.style.top = `${event.clientY + 10}px`;
+        tooltip.textContent = `${slice.label}: ${slice.value}`;
+        hoveredIndex = index;
+        found = true;
+      }
+    });
 
-  //     // Draw the slice
-  //     ctx.beginPath();
-  //     ctx.moveTo(200, 200); // Center of the pie chart
-  //     ctx.arc(200, 200, 200, startAngle, startAngle + sliceAngle);
-  //     ctx.closePath();
-
-  //     // Fill with color
-  //     ctx.fillStyle = this.colors[index];
-  //     ctx.fill();
-
-  //     // Update the start angle
-  //     startAngle += sliceAngle;
-  //   });
-
-  //   // Add labels
-  //   startAngle = 0;
-  //   this.data.forEach((value, index) => {
-  //     const sliceAngle = (value / total) * 2 * Math.PI;
-  //     const labelX = 200 + Math.cos(startAngle + sliceAngle / 2) * 120;
-  //     const labelY = 200 + Math.sin(startAngle + sliceAngle / 2) * 120;
-
-  //     ctx.fillStyle = '#000';
-  //     ctx.font = '14px Arial';
-  //     ctx.fillText(this.labels[index], labelX - 20, labelY);
-
-  //     startAngle += sliceAngle;
-  //   });
-  // }
-
-  private drawPieChart() {
-    const canvas = this.canvas.nativeElement;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const total = this.data.reduce((sum, value) => sum + value, 0);
-    let startAngle = 0;
-    const centerX = 200,
-      centerY = 200,
-      radius = 200;
-    let selectedSlice: number | null = null;
-
-    const slices: {
-      id: number;
-      startAngle: number;
-      endAngle: number;
-      label: string;
-      color: string;
-      value: number;
-    }[] = [];
-
-    const drawSlices = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      startAngle = 0;
-
-      // Assuming canvas dimensions are 400x400, with the center at (centerX, centerY)
-      const centerX = 200;
-      const centerY = 200;
-      const radius = 100; // Set a reasonable radius for your pie chart
-
-      this.data.forEach((value, index) => {
-        const sliceAngle = (value / total) * 2 * Math.PI;
-        const isSelected = selectedSlice === index;
-        const offset = isSelected ? 5 : 0;
-
-        // Calculate position of slice
-        const midAngle = startAngle + sliceAngle / 2;
-        const offsetX = Math.cos(midAngle) * offset;
-        const offsetY = Math.sin(midAngle) * offset;
-
-        let color = this.colors[index];
-        slices[index] = {
-          id: index,
-          startAngle,
-          endAngle: startAngle + sliceAngle,
-          label: this.labels[index],
-          color: selectedSlice === null || isSelected ? color : `${color}26`,
-          value,
-        };
-
-        // Draw slice
-        ctx.beginPath();
-        ctx.moveTo(centerX + offsetX, centerY + offsetY);
-        ctx.arc(
-          centerX + offsetX,
-          centerY + offsetY,
-          radius,
-          startAngle,
-          startAngle + sliceAngle
-        );
-        ctx.closePath();
-
-        ctx.fillStyle =
-          selectedSlice === null || isSelected ? color : `${color}26`;
-        ctx.fill();
-
-        startAngle += sliceAngle;
-      });
-
-      // Add labels with lines
-      startAngle = 0;
-      this.data.forEach((value, index) => {
-        const sliceAngle = (value / total) * 2 * Math.PI;
-
-        // Adjust label position to ensure it's within the canvas boundaries
-        const labelDistance = radius + 20; // Distance from the center to the label
-
-        // Calculate the label position
-        let labelX =
-          centerX + Math.cos(startAngle + sliceAngle / 2) * labelDistance;
-        let labelY =
-          centerY + Math.sin(startAngle + sliceAngle / 2) * labelDistance;
-
-        // Ensure the label stays within the canvas (optional, but a good safety measure)
-        const canvasPadding = 10; // Padding from the edge of the canvas
-        const maxX = 400 - canvasPadding;
-        const maxY = 400 - canvasPadding;
-        const minX = canvasPadding;
-        const minY = canvasPadding;
-
-        // Adjust label position if it goes beyond canvas bounds
-        if (labelX > maxX) labelX = maxX;
-        if (labelX < minX) labelX = minX;
-        if (labelY > maxY) labelY = maxY;
-        if (labelY < minY) labelY = minY;
-
-        // Draw line from slice to label
-        const lineStartX =
-          centerX + Math.cos(startAngle + sliceAngle / 2) * radius;
-        const lineStartY =
-          centerY + Math.sin(startAngle + sliceAngle / 2) * radius;
-
-        ctx.beginPath();
-        ctx.moveTo(lineStartX, lineStartY); // Starting point (slice center)
-        ctx.lineTo(labelX, labelY); // Ending point (label position)
-        ctx.strokeStyle = '#000'; // Line color (black)
-        ctx.lineWidth = 1;
-        ctx.stroke();
-
-        // Draw label
-        ctx.fillStyle = '#000';
-        ctx.font = '14px Arial';
-
-        // Calculate text width and adjust position for centering the text
-        const textWidth = ctx.measureText(this.labels[index]).width;
-        ctx.fillText(this.labels[index], labelX - textWidth / 2, labelY); // Adjust text positioning to center it
-
-        startAngle += sliceAngle;
-      });
-
-      // this.data.forEach((value, index) => {
-      //   const sliceAngle = (value / total) * 2 * Math.PI;
-      //   const isSelected = selectedSlice === index;
-      //   const offset = isSelected ? 5 : 0;
-
-      //   // Calculate position of slice
-      //   const midAngle = startAngle + sliceAngle / 2;
-      //   const offsetX = Math.cos(midAngle) * offset;
-      //   const offsetY = Math.sin(midAngle) * offset;
-
-      //   let color = this.colors[index];
-      //   slices[index] = {
-      //     id: index,
-      //     startAngle,
-      //     endAngle: startAngle + sliceAngle,
-      //     label: this.labels[index],
-      //     color: selectedSlice === null || isSelected ? color : `${color}26`,
-      //     value,
-      //   };
-
-      //   // Draw slice
-      //   ctx.beginPath();
-      //   ctx.moveTo(centerX + offsetX, centerY + offsetY);
-      //   ctx.arc(centerX + offsetX, centerY + offsetY, radius, startAngle, startAngle + sliceAngle);
-      //   ctx.closePath();
-
-      //   ctx.fillStyle = selectedSlice === null || isSelected ? color : `${color}26`;
-      //   ctx.fill();
-
-      //   startAngle += sliceAngle;
-      // });
-
-      // // Add labels with lines
-      // startAngle = 0;
-      // this.data.forEach((value, index) => {
-      //   const sliceAngle = (value / total) * 2 * Math.PI;
-
-      //   // Calculate the position for the label outside the chart
-      //   const labelX = centerX + Math.cos(startAngle + sliceAngle / 2) * (radius + 20);  // Added 20 for distance
-      //   const labelY = centerY + Math.sin(startAngle + sliceAngle / 2) * (radius + 20);  // Added 20 for distance
-
-      //   // Draw line from slice to label
-      //   const lineStartX = centerX + Math.cos(startAngle + sliceAngle / 2) * radius;
-      //   const lineStartY = centerY + Math.sin(startAngle + sliceAngle / 2) * radius;
-
-      //   ctx.beginPath();
-      //   ctx.moveTo(lineStartX, lineStartY);  // Starting point (slice center)
-      //   ctx.lineTo(labelX, labelY);  // Ending point (label position)
-      //   ctx.strokeStyle = '#000';  // Line color (black)
-      //   ctx.lineWidth = 1;
-      //   ctx.stroke();
-
-      //   // Draw label
-      //   ctx.fillStyle = '#000';
-      //   ctx.font = '14px Arial';
-      //   ctx.fillText(this.labels[index], labelX - 20, labelY);  // Adjust text positioning if needed
-
-      //   startAngle += sliceAngle;
-      // });
-
-      // this.data.forEach((value, index) => {
-      //   const sliceAngle = (value / total) * 2 * Math.PI;
-      //   const isSelected = selectedSlice === index;
-      //   const offset = isSelected ? 5 : 0;
-
-      //   // Hitung posisi tengah slice
-      //   const midAngle = startAngle + sliceAngle / 2;
-      //   const offsetX = Math.cos(midAngle) * offset;
-      //   const offsetY = Math.sin(midAngle) * offset;
-
-      //   let color = this.colors[index];
-      //   // Simpan informasi slice
-      //   slices[index] = {
-      //     id: index,
-      //     startAngle,
-      //     endAngle: startAngle + sliceAngle,
-      //     label: this.labels[index],
-      //     color: selectedSlice === null || isSelected ? color : `${color}26`,
-      //     value,
-      //   };
-
-      //   // Gambar slice
-      //   ctx.beginPath();
-      //   ctx.moveTo(centerX + offsetX, centerY + offsetY);
-      //   ctx.arc(
-      //     centerX + offsetX,
-      //     centerY + offsetY,
-      //     radius,
-      //     startAngle,
-      //     startAngle + sliceAngle
-      //   );
-      //   ctx.closePath();
-
-      //   ctx.fillStyle =
-      //     selectedSlice === null || isSelected ? color : `${color}26`;
-      //   ctx.fill();
-
-      //   startAngle += sliceAngle;
-      // });
-
-      // // Add labels
-      // startAngle = 0;
-      // this.data.forEach((value, index) => {
-      //   const sliceAngle = (value / total) * 2 * Math.PI;
-      //   const labelX = 200 + Math.cos(startAngle + sliceAngle / 2) * 120;
-      //   const labelY = 200 + Math.sin(startAngle + sliceAngle / 2) * 120;
-      //   ctx.fillStyle = '#000';
-      //   ctx.font = '14px Arial';
-      //   ctx.fillText(this.labels[index], labelX - 20, labelY);
-      //   startAngle += sliceAngle;
-      // });
-    };
-
-    // Add tooltip element (initially hidden)
-    const tooltip = document.createElement('div');
-
-    if (this.allowTooltip) {
-      canvas.addEventListener('mousemove', (event) => {
-        // Check if the click is outside the canvas
-        if (!canvas.contains(event.target as Node)) {
-          tooltip.style.display = 'none'; // Hide the tooltip if clicked outside
-          return;
-        }
-        tooltip.style.position = 'absolute';
-        tooltip.style.padding = '5px';
-        tooltip.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-        tooltip.style.color = 'white';
-        tooltip.style.borderRadius = '4px';
-        tooltip.style.display = 'none'; // Hidden by default
-        document.body.appendChild(tooltip);
-        const rect = canvas.getBoundingClientRect();
-        // const mouseX = event.clientX - rect.left;
-        // const mouseY = event.clientY - rect.top;
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
-
-        // Check if the click is inside the pie chart
-        const dist = Math.sqrt(
-          Math.pow(mouseX - 200, 2) + Math.pow(mouseY - 200, 2)
-        );
-        if (dist > 200 || dist < 0) return; // Click is outside the pie chart
-
-        // Determine which slice was clicked
-        const angle = Math.atan2(mouseY - 200, mouseX - 200);
-        const normalizedAngle = angle < 0 ? angle + 2 * Math.PI : angle;
-
-        for (const slice of slices) {
-          if (
-            normalizedAngle >= slice.startAngle &&
-            normalizedAngle <= slice.endAngle
-          ) {
-            // Show tooltip near the clicked slice
-            const tooltipX =
-              200 +
-              Math.cos(
-                slice.startAngle + (slice.endAngle - slice.startAngle) / 2
-              ) *
-                150;
-            const tooltipY =
-              200 +
-              Math.sin(
-                slice.startAngle + (slice.endAngle - slice.startAngle) / 2
-              ) *
-                150;
-
-            tooltip.style.left = `${event.clientX}px`;
-            tooltip.style.top = `${event.clientY}px`;
-            tooltip.style.display = 'block'; // Show tooltip
-
-            tooltip.textContent = `${slice.label}: ${slice.value}`;
-            break;
-          }
-        }
-      });
+    // Show/hide tooltip
+    if (!found) {
+      tooltip.style.display = 'none';
     }
 
-    if (this.chartOnClick) {
-      // Tambahkan event listener untuk klik
-      canvas.addEventListener('click', (event: MouseEvent) => {
-        const rect = canvas.getBoundingClientRect();
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
-        const dx = mouseX - centerX;
-        const dy = mouseY - centerY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const angle = Math.atan2(dy, dx);
-        const normalizedAngle = angle >= 0 ? angle : angle + 2 * Math.PI;
+    // Change cursor style
+    this.canvasRef.nativeElement.style.cursor = found ? 'pointer' : 'default';
 
-        if (distance <= radius) {
-          for (const slice of slices) {
-            if (
-              normalizedAngle >= slice.startAngle &&
-              normalizedAngle < slice.endAngle
-            ) {
-              selectedSlice = selectedSlice === slice.id ? null : slice.id;
-              drawSlices();
-              break;
-            }
-          }
-        }
-      });
+    // Update hovered slice
+    if (this.hoveredSliceIndex !== hoveredIndex) {
+      this.hoveredSliceIndex = hoveredIndex;
+      this.drawChart(); // Redraw to show highlight
     }
+  }
 
-    drawSlices();
+  @HostListener('click', ['$event'])
+  onClick(event: MouseEvent) {
+    const rect = this.canvasRef.nativeElement.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const dx = x - this.centerX;
+    const dy = y - this.centerY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx);
+    const normAngle = angle >= 0 ? angle : 2 * Math.PI + angle;
+
+    this.slices.forEach((slice, i) => {
+      if (
+        dist >= this.innerRadius &&
+        dist <= this.radius &&
+        normAngle >= slice.startAngle! &&
+        normAngle <= slice.endAngle!
+      ) {
+        this.selectedSliceIndex = this.selectedSliceIndex === i ? null : i;
+        this.drawChart();
+      }
+    });
+  }
+
+  // Event handling when a legend item is clicked
+  toggleSliceVisibility(index: number) {
+    this.data[index].hidden = !this.data[index].hidden;
+    this.drawChart();
   }
 }
-
-
-// other solution
-
-// import { Component, ElementRef, AfterViewInit, ViewChild, HostListener } from '@angular/core';
-
-// @Component({
-//   selector: 'app-pie-chart',
-//   templateUrl: './pie-chart.component.html',
-//   styleUrls: ['./pie-chart.component.css']
-// })
-// export class PieChartComponent implements AfterViewInit {
-
-//   @ViewChild('pieCanvas', { static: false }) pieCanvas: ElementRef;
-//   ctx: CanvasRenderingContext2D;
-  
-//   data: number[] = [40, 30, 20, 10];  // Pie chart data
-//   labels: string[] = ['Label 1', 'Label 2', 'Label 3', 'Label 4'];  // Labels for slices
-//   colors: string[] = ['#FF6347', '#3CB371', '#4682B4', '#FFD700'];  // Slice colors
-//   total: number = this.data.reduce((sum, value) => sum + value, 0);  // Total sum of values
-  
-//   constructor() { }
-
-//   ngAfterViewInit() {
-//     this.ctx = this.pieCanvas.nativeElement.getContext('2d');
-//     this.drawPieChart();
-//   }
-
-//   drawPieChart() {
-//     // Get the parent container's size
-//     const container = this.pieCanvas.nativeElement.parentElement;
-//     const width = container.clientWidth;
-//     const height = container.clientHeight;
-//     this.pieCanvas.nativeElement.width = width;
-//     this.pieCanvas.nativeElement.height = height;
-
-//     // Calculate the center and radius of the pie chart
-//     const centerX = width / 2;
-//     const centerY = height / 2;
-//     const radius = Math.min(width, height) / 3;  // Set radius as one-third of the smallest dimension
-
-//     let startAngle = 0;
-
-//     // Clear the canvas before redrawing
-//     this.ctx.clearRect(0, 0, width, height);
-
-//     // Draw slices
-//     this.data.forEach((value, index) => {
-//       const sliceAngle = (value / this.total) * 2 * Math.PI;
-//       const isSelected = false;
-//       const offset = isSelected ? 5 : 0;
-
-//       const midAngle = startAngle + sliceAngle / 2;
-//       const offsetX = Math.cos(midAngle) * offset;
-//       const offsetY = Math.sin(midAngle) * offset;
-
-//       // Draw slice
-//       this.ctx.beginPath();
-//       this.ctx.moveTo(centerX + offsetX, centerY + offsetY);
-//       this.ctx.arc(centerX + offsetX, centerY + offsetY, radius, startAngle, startAngle + sliceAngle);
-//       this.ctx.closePath();
-
-//       this.ctx.fillStyle = this.colors[index];
-//       this.ctx.fill();
-
-//       startAngle += sliceAngle;
-//     });
-
-//     // Add labels with lines
-//     startAngle = 0;
-//     this.data.forEach((value, index) => {
-//       const sliceAngle = (value / this.total) * 2 * Math.PI;
-
-//       const labelDistance = radius + 20;
-//       const labelX = centerX + Math.cos(startAngle + sliceAngle / 2) * labelDistance;
-//       const labelY = centerY + Math.sin(startAngle + sliceAngle / 2) * labelDistance;
-
-//       // Draw line from slice to label
-//       const lineStartX = centerX + Math.cos(startAngle + sliceAngle / 2) * radius;
-//       const lineStartY = centerY + Math.sin(startAngle + sliceAngle / 2) * radius;
-
-//       this.ctx.beginPath();
-//       this.ctx.moveTo(lineStartX, lineStartY);
-//       this.ctx.lineTo(labelX, labelY);
-//       this.ctx.strokeStyle = '#000';
-//       this.ctx.lineWidth = 1;
-//       this.ctx.stroke();
-
-//       // Draw label
-//       this.ctx.fillStyle = '#000';
-//       this.ctx.font = '14px Arial';
-
-//       const textWidth = this.ctx.measureText(this.labels[index]).width;
-//       this.ctx.fillText(this.labels[index], labelX - textWidth / 2, labelY);
-
-//       startAngle += sliceAngle;
-//     });
-//   }
-
-//   // Redraw the pie chart when the window is resized
-//   @HostListener('window:resize', ['$event'])
-//   onResize(event) {
-//     this.drawPieChart();
-//   }
-// }

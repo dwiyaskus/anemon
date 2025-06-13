@@ -1,24 +1,77 @@
-<div class="chart-container" [class]="legendPosition">
+<div
+  id="legend"
+  *ngIf="['top left', 'top right', 'top'].includes(legendPosition)"
+  [class]="`${legendPosition} ${legendOrientation}`"
+>
   <div
-    *ngIf="legendPosition === 'top' || legendPosition === 'bottom'"
-    class="legend-container"
+    *ngFor="let d of data; let i = index"
+    class="legend-item"
+    (click)="toggleSliceVisibility(i)"
   >
-    <div *ngFor="let label of labels; let i = index" class="legend-item">
-      <span class="legend-color" [style.background-color]="colors[i]"></span>
-      {{ label }}
+    <span
+      class="legend-color"
+      [style.background]="!d.hidden ? d.color : '#3333'"
+    ></span>
+    {{ d.label }}
+  </div>
+</div>
+<div style="display: flex; place-self: center">
+  <div
+    id="legend"
+    *ngIf="['left'].includes(legendPosition)"
+    [class]="`${legendPosition} ${legendOrientation === 'horizontal'? 'horizontal':'center' }`"
+  >
+    <div
+      *ngFor="let d of data; let i = index"
+      class="legend-item"
+      (click)="toggleSliceVisibility(i)"
+    >
+      <span
+        class="legend-color"
+        [style.background]="!d.hidden ? d.color : '#3333'"
+      ></span>
+      {{ d.label }}
     </div>
   </div>
-  <div class="chart-wrapper">
-    <canvas #canvas width="400" height="400"></canvas>
-    <div class="chart-label" *ngIf="type === 'donut'">{{ label }}</div>
-  </div>
+  <canvas
+    #canvas
+    [width]="width ?? containerCanvas.clientWidth"
+    [height]="height ?? containerCanvas.clientHeight"
+  ></canvas>
+  <div #tooltip id="tooltip"></div>
   <div
-    *ngIf="legendPosition === 'left' || legendPosition === 'right'"
-    class="legend-container"
+    id="legend"
+    *ngIf="['right'].includes(legendPosition)"
+    [class]="`${legendPosition} ${legendOrientation === 'horizontal'? 'horizontal':'center' }`"
   >
-    <div *ngFor="let label of labels; let i = index" class="legend-item">
-      <span class="legend-color" [style.background-color]="colors[i]"></span>
-      {{ label }}
+    <div
+      *ngFor="let d of data; let i = index"
+      class="legend-item"
+      (click)="toggleSliceVisibility(i)"
+    >
+      <span
+        class="legend-color"
+        [style.background]="!d.hidden ? d.color : '#3333'"
+      ></span>
+      {{ d.label }}
     </div>
+  </div>
+</div>
+
+<div
+  id="legend"
+  *ngIf="['bottom left', 'bottom right', 'bottom'].includes(legendPosition)"
+  [class]="`${legendPosition} ${legendOrientation}`"
+>
+  <div
+    *ngFor="let d of data; let i = index"
+    class="legend-item"
+    (click)="toggleSliceVisibility(i)"
+  >
+    <span
+      class="legend-color"
+      [style.background]="!d.hidden ? d.color : '#3333'"
+    ></span>
+    {{ d.label }}
   </div>
 </div>

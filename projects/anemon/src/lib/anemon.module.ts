@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BarChartComponent } from './chart/bar/bar.component';
+import { BarCanvasComponent } from './chart/bar/bar-canvas.component';
 import { ButtonComponent } from '../lib/core/button/button.component';
 import { CheckboxComponent } from './core/checkbox/checkbox.component';
 import { DivisionComponent } from './core/division/division.component';
@@ -23,10 +24,10 @@ import { LineComponent } from './chart/line/line.component';
     SelectComponent,
     BigNumberComponent,
     PieComponent,
-    LineComponent
+    LineComponent,
+    BarCanvasComponent
   ],
   exports: [
-    // AnemonComponent,
     BarChartComponent,
     ButtonComponent,
     CheckboxComponent,
@@ -36,7 +37,8 @@ import { LineComponent } from './chart/line/line.component';
     SelectComponent,
     BigNumberComponent,
     PieComponent,
-    LineComponent
+    LineComponent,
+    BarCanvasComponent
   ]
 })
 export class AnemonModule {}

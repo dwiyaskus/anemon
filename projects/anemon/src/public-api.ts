@@ -8,6 +8,7 @@ export * from './lib/anemon.module';
  * CHART
  */
 export * from './lib/chart/bar/bar.component';
+export * from './lib/chart/bar/bar-canvas.component';
 export * from './lib/chart/big-number/big-number.component';
 export * from './lib/chart/pie-donut/pie-donut.component';
 export * from './lib/chart/line/line.component';

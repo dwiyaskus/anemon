@@ -1,5 +1,5 @@
 <div class="gauge-container">
-  <svg viewBox="0 0 200 100" class="gauge">
+  <svg viewBox="0 -5 210 115" class="gauge">
     <!-- Arc segments -->
     <path
       *ngFor="let arc of arcPaths"
@@ -7,7 +7,16 @@
       [attr.stroke]="arc.color"
       class="gauge-segment"
     />
-
+  <!-- Text labels outside the arc -->
+  <text
+    *ngFor="let label of labels"
+    [attr.x]="label.x"
+    [attr.y]="label.y"
+    font-size="3"
+    fill="#333"
+  >
+    {{ label.value }}
+  </text>
     <!-- Needle -->
     <g [attr.transform]="'rotate(' + rotation + ', 100, 100)'">
       <line x1="100" y1="100" x2="100" y2="50" [attr.stroke]="needleColor" class="needle" />

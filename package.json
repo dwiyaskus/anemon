@@ -9,7 +9,7 @@
     "test": "ng test",
     "build-library": "npm version patch & ng build anemon",
     "pack-lib": "cd dist/anemon && npm pack",
-    "storybook": "ng run anemon:storybook",
+    "storybook": "ng run anemon:storybook --open",
     "build-storybook": "ng run anemon:build-storybook",
     "serve-storybook": "serve storybook-static"
   },

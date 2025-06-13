@@ -4,20 +4,20 @@ import { PieComponent } from './pie-donut.component';
 const meta: Meta<PieComponent> = {
   title: 'Pie',
   component: PieComponent,
-  //👇 Our exports that end in "Data" are not stories.
   excludeStories: /.*Data$/,
   tags: ['autodocs'],
   args: {},
   argTypes: {
-    type: {
-      options: ['pie', 'donut'],
+    legendOrientation: {
+      options: ['vertical', 'horizontal'],
       control: { type: 'radio' },
       table: {
-        defaultValue: { summary: 'pie' },
+        defaultValue: { summary: 'vertical' },
       },
     },
+
     legendPosition: {
-      options: ['top', 'right', 'bottom', 'left'],
+      options: ['bottom', 'top', 'left', 'right'],
       control: { type: 'radio' },
       table: {
         defaultValue: { summary: 'bottom' },
@@ -31,12 +31,20 @@ type Story = StoryObj<PieComponent>;
 
 export const Default: Story = {
   args: {
-    type: 'pie',
-    data: [300, 500, 100],
-    labels: ['Red', 'Blue', 'Yellow'],
-    colors: ['#FF6384', '#36A2EB', '#FFCE56'],
-    label: 'Total: 900',
-    legendPosition: 'bottom', // Options: 'top', 'bottom', 'left', 'right'
-    radius: 100,
+    legendPosition: 'top left',
+    legendOrientation: 'vertical',
+    data: [
+      { label: 'A', value: 40, color: '#FF6384' },
+      { label: 'B', value: 25, color: '#36A2EB' },
+      { label: 'C', value: 20, color: '#FFCE56' },
+      { label: 'D', value: 15, color: '#4BC0C0' },
+    ],
+    width: 600,
+    height: 600,
+    donut: false,
+    fontInnerText: 18,
+    innerText: '',
+    innerRadius: 0,
+    radius: 150,
   },
 };
